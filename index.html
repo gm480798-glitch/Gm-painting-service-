@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="geo.region" content="IN-KA"/><meta name="geo.placename" content="Bengaluru"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="canonical" href="https://gmpaintingservice.in/"/>
+<meta property="og:url" content="https://gmpaintingservice.in/"/>
+<meta property="og:image" content="https://gmpaintingservice.in/logo.png"/>
+<meta property="og:image:alt" content="GM Painting Service logo"/>
+<meta name="twitter:title" content="House Painters in Bengaluru | Painting & Waterproofing | GM Painting"/>
+<meta name="twitter:description" content="Home painting, wood polishing, designer textures and waterproofing in Bengaluru. Contact GM Painting Service for a site estimate."/>
+<meta name="twitter:image" content="https://gmpaintingservice.in/logo.png"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/><link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png"/><link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"/>
+<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<style>html,body{background:#eef0f3!important;color:#20252d!important}body *{color-scheme:light}
+/* GM service catalogue + add-to-estimate */
+.catalog-intro{font-size:13px;color:var(--muted);line-height:1.5;margin:-4px 0 14px}
+.catalog-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.catalog-switch button,.home-type button{border:1px solid #dfe3e9;background:#fff;color:var(--text);border-radius:12px;padding:11px 8px;font-weight:800;cursor:pointer}
+.catalog-switch button.active,.home-type button.active{background:#172033;color:#fff;border-color:#172033}
+.home-type{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 14px}
+.catalog-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.catalog-item{background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.catalog-item img{width:100%;height:112px;object-fit:cover;border-radius:10px;display:block;background:#f1f3f5}.catalog-item h3{font-size:14px;line-height:1.25;margin:0}
+.catalog-item p{font-size:11px;line-height:1.4;color:var(--muted);margin:0;flex:1}
+.catalog-price{font-size:17px;font-weight:900;color:var(--navy)}
+.catalog-price small{display:block;font-size:10px;font-weight:600;color:var(--muted);margin-top:2px}
+.add-service{background:var(--orange);color:#fff;border:0;border-radius:10px;padding:9px 10px;font-size:12px;font-weight:900;cursor:pointer}
+.add-service.added{background:#e8f7ef;color:#087c4c;border:1px solid #b8e7ce}
+.catalog-hidden{display:none!important}
+.cart-box{margin-top:14px;background:#172033;color:#fff;border-radius:18px;padding:16px}
+.cart-box h3{font-size:17px;margin:0 0 10px}
+.cart-empty{font-size:12px;color:#d1d7e1;line-height:1.45}
+.cart-line{display:grid;grid-template-columns:1fr auto;gap:8px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.15);font-size:12px;align-items:center}
+.cart-line:last-child{border-bottom:0}
+.cart-line strong{display:block;font-size:12px}
+.cart-line small{display:block;color:#cbd1db;margin-top:3px}
+.cart-remove{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:8px;padding:5px 8px;font-size:11px;cursor:pointer}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding-top:12px;border-top:1px solid rgba(255,255,255,.2);font-weight:900}
+.cart-total b{font-size:21px}
+.cart-note{font-size:10px;line-height:1.45;color:#d1d7e1;margin:9px 0 0}
+.cart-book{width:100%;margin-top:13px;background:var(--green);color:#fff;border:0;border-radius:12px;padding:13px;font-weight:900;cursor:pointer}
+.catalog-badge{display:inline-block;background:#fff1e6;color:#a44705;border-radius:7px;padding:4px 6px;font-size:9px;font-weight:900;align-self:flex-start}
+@media(max-width:360px){.catalog-grid{grid-template-columns:1fr}.catalog-item{padding:14px}}
+
+
+.pro-category-list{display:flex;flex-direction:column;gap:0;border-top:1px solid #eceef2}
+.pro-category{display:grid;grid-template-columns:92px 1fr 18px;gap:14px;align-items:center;width:100%;text-align:left;padding:18px 0;border:0;border-bottom:1px solid #eceef2;background:transparent;cursor:pointer;color:inherit}
+.pro-category img{width:92px;height:104px;object-fit:cover;border-radius:13px;background:#f0f2f7}
+.pro-category strong{display:block;font-size:16px;line-height:1.25;margin-bottom:7px;color:#172033}
+.pro-category small{display:block;font-size:12px;line-height:1.55;color:#68707d;font-weight:500}
+.pro-category b{font-size:27px;font-weight:400;color:#777}
+.catalog-back{border:0;background:transparent;padding:8px 0 12px;color:#172033;font-weight:800;cursor:pointer;font-size:16px}
+.catalog-back span{font-size:12px;margin-left:5px}
+.catalog-page-heading h2{font-size:24px;letter-spacing:-.4px;margin:8px 0}
+.catalog-page-heading p{font-size:13px;line-height:1.5;color:#68707d;margin:0 0 16px}
+.bhk-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 16px}
+.bhk-tabs button{border:1px solid #e0e3e8;border-radius:11px;padding:11px;background:#fff;color:#172033;font-weight:800}
+.bhk-tabs button.active{background:#172033;color:#fff;border-color:#172033}
+.rental-cards{display:flex;flex-direction:column;gap:14px}
+.rental-card{position:relative;display:grid;grid-template-columns:116px 1fr;gap:12px;padding:14px 0 18px;border-bottom:1px solid #e6e8ed;min-height:160px}
+.rental-card>img{width:116px;height:142px;object-fit:cover;border-radius:12px;background:#f1f2f4}
+.rental-card-info{padding-right:2px;min-width:0}
+.rental-card-info h3{font-size:15px;line-height:1.3;margin:2px 0 6px;color:#172033}
+.rating-line{font-size:11px;color:#535b68;margin:0 0 7px}
+.rating-line span{color:#7b818c}
+.price-line{font-size:12px;margin:0 0 8px;color:#172033}
+.price-line strong{font-size:14px}
+.included{font-size:11px;line-height:1.45;color:#68707d;margin:0 0 8px}
+.details-link{border:0;background:transparent;color:#7650b8;font-size:12px;font-weight:800;text-align:left;padding:0;cursor:pointer}
+.rental-add{position:absolute;right:8px;bottom:8px;min-width:68px;box-shadow:0 2px 8px #00000012}
+.package-detail-modal{position:fixed;inset:0;z-index:10000;background:#10182888;display:flex;align-items:flex-end;justify-content:center;padding:12px}
+.package-detail-sheet{position:relative;background:#fff;color:#172033;border-radius:20px 20px 14px 14px;padding:24px 20px 18px;width:100%;max-width:520px;box-shadow:0 12px 45px #0003}
+.package-detail-sheet h3{font-size:21px;margin:12px 0}
+.package-detail-sheet p{font-size:13px;line-height:1.6;color:#596170}
+.package-detail-close{position:absolute;right:14px;top:12px;border:0;background:#f1f2f5;border-radius:50%;width:32px;height:32px;font-size:22px}
+@media(max-width:380px){.pro-category{grid-template-columns:78px 1fr 16px;gap:10px}.pro-category img{width:78px;height:92px}.rental-card{grid-template-columns:96px 1fr;gap:10px}.rental-card>img{width:96px;height:132px}.rental-card-info h3{font-size:14px}}
+
+
+.paint-spec-panel{margin:18px 0;padding:17px;border:1px solid #e3e6eb;border-radius:17px;background:#fbfcfe}
+.paint-spec-panel h3{font-size:18px;line-height:1.3;margin:0 0 8px;color:#172033}
+.paint-spec-lead{font-size:12px;line-height:1.55;color:#596170;margin:0 0 13px}
+.paint-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.paint-spec-grid>div{background:#fff;border:1px solid #e8ebf0;border-radius:11px;padding:11px}
+.paint-spec-grid b{display:block;font-size:12px;color:#172033;margin-bottom:5px}
+.paint-spec-grid span{display:block;font-size:11px;line-height:1.5;color:#68707d}
+.paint-spec-note{font-size:10px;line-height:1.5;color:#777f8d;margin:12px 0 0}
+@media(max-width:390px){.paint-spec-grid{grid-template-columns:1fr}}
+
+
+.terrace-estimator{display:grid;gap:7px;margin:0 12px 2px!important;padding:10px;background:#f7f8fa;border-radius:10px}.terrace-estimator label{display:grid;gap:5px;font-size:11px;font-weight:800;color:#4b5563}.terrace-estimator input,.terrace-estimator select{width:100%;min-height:38px;border:1px solid #d7dce4;border-radius:8px;padding:7px 9px;background:#fff;font:inherit;color:#172033}.terrace-estimator input:focus,.terrace-estimator select:focus{outline:2px solid #f97316;outline-offset:1px}
+
+.service-photo-row{grid-template-columns:1fr!important}.service-photo-row .stage{height:180px!important}.service-photo-row .stage img{height:100%!important;object-fit:cover!important}.service-photo-row .stage:after{display:none!important}
+</style>
+<meta content="GM Painting Service in Bengaluru offers interior and exterior painting, wood polishing, designer wall textures, terrace and wall waterproofing, tile grouting and swimming pool coating. Request a site estimate." name="description"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<meta content="painting company in Bengaluru, house painting Bangalore, home painters Bengaluru, interior painting, exterior painting, wood polishing, texture painting, waterproofing, tile grouting, swimming pool waterproofing" name="keywords"/>
+<meta content="website" property="og:type"/>
+<meta content="House Painters in Bengaluru | Painting & Waterproofing | GM Painting" property="og:title"/>
+<meta content="Home painting, wood polishing, designer textures and waterproofing in Bengaluru. Contact GM Painting Service for a site estimate." property="og:description"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["HousePainter", "LocalBusiness"], "@id": "https://gmpaintingservice.in/#business", "name": "GM Painting Service", "url": "https://gmpaintingservice.in/", "image": "https://gmpaintingservice.in/logo.png", "logo": "https://gmpaintingservice.in/logo.png", "telephone": "+919958416811", "priceRange": "₹₹", "description": "House painting company in Bengaluru: interior and exterior painting, rental painting, wood polishing, texture walls, waterproofing and tile grouting.", "address": {"@type": "PostalAddress", "addressLocality": "Bengaluru", "addressRegion": "Karnataka", "addressCountry": "IN"}, "areaServed": [{"@type": "City", "name": "Bengaluru"}, {"@type": "Place", "name": "Banashankari, Bengaluru"}, {"@type": "Place", "name": "JP Nagar, Bengaluru"}, {"@type": "Place", "name": "Jayanagar, Bengaluru"}, {"@type": "Place", "name": "BTM Layout, Bengaluru"}, {"@type": "Place", "name": "HSR Layout, Bengaluru"}, {"@type": "Place", "name": "Koramangala, Bengaluru"}, {"@type": "Place", "name": "Basavanagudi, Bengaluru"}, {"@type": "Place", "name": "Whitefield, Bengaluru"}, {"@type": "Place", "name": "Indiranagar, Bengaluru"}, {"@type": "Place", "name": "Marathahalli, Bengaluru"}, {"@type": "Place", "name": "Bellandur, Bengaluru"}, {"@type": "Place", "name": "Sarjapur Road, Bengaluru"}, {"@type": "Place", "name": "Electronic City, Bengaluru"}, {"@type": "Place", "name": "Bommanahalli, Bengaluru"}, {"@type": "Place", "name": "Begur, Bengaluru"}, {"@type": "Place", "name": "Hulimavu, Bengaluru"}, {"@type": "Place", "name": "Arekere, Bengaluru"}, {"@type": "Place", "name": "Bannerghatta Road, Bengaluru"}, {"@type": "Place", "name": "Kengeri, Bengaluru"}, {"@type": "Place", "name": "Rajajinagar, Bengaluru"}, {"@type": "Place", "name": "Malleshwaram, Bengaluru"}, {"@type": "Place", "name": "Yeshwanthpur, Bengaluru"}, {"@type": "Place", "name": "Vijayanagar, Bengaluru"}, {"@type": "Place", "name": "Domlur, Bengaluru"}, {"@type": "Place", "name": "Ejipura, Bengaluru"}, {"@type": "Place", "name": "Uttarahalli, Bengaluru"}, {"@type": "Place", "name": "Padmanabhanagar, Bengaluru"}, {"@type": "Place", "name": "Kumaraswamy Layout, Bengaluru"}, {"@type": "Place", "name": "Nagarbhavi, Bengaluru"}, {"@type": "Place", "name": "Wilson Garden, Bengaluru"}], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Painting services", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Rental Home Painting", "url": "https://gmpaintingservice.in/rental-home-painting-bengaluru"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Home Owner Painting", "url": "https://gmpaintingservice.in/home-owner-painting-bengaluru"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Interior Painting", "url": "https://gmpaintingservice.in/interior-painting-bengaluru"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Exterior Painting", "url": "https://gmpaintingservice.in/exterior-painting-bengaluru"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Waterproofing", "url": "https://gmpaintingservice.in/waterproofing-bengaluru"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Wood Polishing", "url": "https://gmpaintingservice.in/wood-polishing-bengaluru"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tile Grouting", "url": "https://gmpaintingservice.in/tile-grouting-bengaluru"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Texture Painting", "url": "https://gmpaintingservice.in/texture-painting-bengaluru"}}]}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do you provide a site inspection?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The requirement can be discussed over call/WhatsApp and the site can be inspected before a final estimate."}}, {"@type": "Question", "name": "Which paint brands do you use?", "acceptedAnswer": {"@type": "Answer", "text": "We can work with suitable branded paint systems such as Asian Paints, Berger, Dulux and Nerolac, depending on the project requirement."}}, {"@type": "Question", "name": "Do you do roof waterproofing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Roof crack treatment and waterproofing/coating options are available after checking the roof condition."}}, {"@type": "Question", "name": "Can I send photos for an initial estimate?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Send clear photos/videos of the walls, roof or work area on WhatsApp for an initial discussion."}}]}]}</script>
+<title>House Painters in Bengaluru | Painting & Waterproofing | GM Painting</title>
+<style>
+:root{--orange:#f97316;--navy:#172033;--teal:#079f92;--green:#20c96b;--text:#20252d;--muted:#68707d;--bg:#f7f8fa;--line:#e8ebef;--card:#fff;--shadow:0 8px 28px rgba(20,30,50,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef0f3;color-scheme:light;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--text)}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}
+.site{max-width:760px;margin:auto;background:var(--bg);min-height:100vh;padding-bottom:92px;box-shadow:0 0 40px rgba(0,0,0,.08)}
+.header{height:70px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}.brand{display:flex;align-items:center;gap:10px;font-weight:850}.logo{width:43px;height:43px;flex:0 0 43px;border-radius:50%;display:block;object-fit:cover;background:#172033}.brand small{display:block;color:#7b8491;font-size:10px;font-weight:700;margin-top:1px}.header-call{background:#f4f5f7;border-radius:24px;padding:10px 15px;font-weight:800;font-size:14px}
+.hero{position:relative;background:#fff;overflow:hidden}.hero-img{width:100%;height:245px;object-fit:cover;display:block;filter:saturate(1.03)}.hero:after{content:"";position:absolute;inset:0 0 auto 0;height:245px;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 52%,rgba(0,0,0,.48));pointer-events:none}.city{position:absolute;z-index:2;top:16px;left:18px;background:rgba(23,32,51,.84);color:#fff;border-radius:24px;padding:9px 14px;font-size:13px;font-weight:800}.hero-copy{padding:20px 18px 18px}.eyebrow{color:var(--orange);font-weight:850;font-size:13px;text-transform:uppercase;letter-spacing:.7px}.hero h1{font-size:30px;line-height:1.1;margin:8px 0 10px;letter-spacing:-1px}.hero p{margin:0;color:var(--muted);line-height:1.45;font-size:15px}.trust-row{display:grid;grid-template-columns:repeat(3,1fr);margin-top:18px;border:1px solid var(--line);border-radius:16px;overflow:hidden}.trust-stat{padding:13px 7px;text-align:center;background:#fafbfc;border-right:1px solid var(--line)}.trust-stat:last-child{border:0}.trust-stat b{display:block;font-size:19px}.trust-stat span{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.search{margin:14px 18px 0;background:#fff;border:1px solid #dddfe4;border-radius:18px;height:52px;display:flex;align-items:center;padding:0 15px;gap:10px;box-shadow:0 3px 12px rgba(0,0,0,.04)}.search input{border:0;outline:0;width:100%;font-size:15px;background:transparent}.search-icon{font-size:22px;color:#727985}
+.section{padding:0 18px}.section-title{display:flex;align-items:center;justify-content:space-between;margin:28px 0 14px}.section-title h2{font-size:23px;margin:0;letter-spacing:-.4px}.section-title a{font-size:13px;color:var(--orange);font-weight:800}.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.cat{text-align:center;background:transparent;padding:8px 2px;border-radius:16px}.cat-icon{width:56px;height:56px;border-radius:50%;background:#f0f2f7;margin:auto;display:grid;place-items:center;font-size:27px}.cat span{display:block;font-size:12px;line-height:1.2;margin-top:8px;color:#3f4650}
+.quick-trust{padding-top:0}.offer{margin-top:22px;background:linear-gradient(135deg,#fff7ed,#fff);border:1px solid #ffe0bd;border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px}.offer-icon{width:43px;height:43px;border-radius:13px;background:#fff0df;display:grid;place-items:center;font-size:22px}.offer b{display:block}.offer span{font-size:12px;color:var(--muted)}
+.service-list{display:grid;gap:13px}.service-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}.service-img{width:100%;height:160px;object-fit:cover;display:block}.service-body{padding:15px}.service-body h3{margin:0 0 6px;font-size:18px;line-height:1.18}.service-body p{margin:0 0 13px;color:var(--muted);font-size:12.5px;line-height:1.45}.service-foot{display:flex;align-items:center;justify-content:space-between}.pill{font-size:11px;background:#eef9f5;color:#087c68;border-radius:20px;padding:7px 9px;font-weight:800}.estimate-btn{border:0;background:var(--orange);color:#fff;border-radius:11px;padding:10px 13px;font-weight:800;cursor:pointer}
+.products{display:flex;gap:12px;overflow:auto;padding-bottom:4px;scrollbar-width:none}.products::-webkit-scrollbar{display:none}.product{min-width:116px;text-align:center}.product-img{width:82px;height:82px;margin:auto;border-radius:50%;background:#f0f1f3;display:grid;place-items:center;overflow:hidden}.product-img img{width:100%;height:100%;object-fit:contain}.product b{font-size:12px;line-height:1.25;display:block;margin-top:8px}.product small{color:var(--muted);font-size:10px}
+.textures{display:grid;grid-template-columns:1fr 1fr;gap:12px}.texture{height:160px;border-radius:17px;overflow:hidden;position:relative}.texture img{width:100%;height:100%;object-fit:cover}.texture:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.72))}.texture span{position:absolute;z-index:2;bottom:13px;left:13px;color:#fff;font-weight:800;font-size:16px}
+.project-list{display:grid;gap:13px}.project{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px}.project h3{font-size:16px;margin:2px 0 11px}.project-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stage{height:135px;border-radius:12px;overflow:hidden;position:relative;background:#ddd}.stage img{width:100%;height:100%;object-fit:cover}.stage span{position:absolute;top:7px;left:7px;background:rgba(23,32,51,.85);color:#fff;padding:5px 7px;border-radius:7px;font-size:8px;font-weight:900}.before span{background:#c73535}.process span{background:#2563a9}.after span{background:#159b62}.sample-note{font-size:11px;color:#858c97;margin:9px 2px 0}
+.promise{background:var(--navy);color:#fff;border-radius:20px;padding:20px;margin-top:28px}.promise h2{margin:0 0 13px;font-size:22px}.promise-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.promise-item{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:12px;font-size:13px;font-weight:750}.promise-item small{display:block;color:#cbd1db;font-weight:500;margin-top:4px}
+.steps{display:grid;gap:9px}.step{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px}.num{width:34px;height:34px;border-radius:50%;background:#fff1e6;color:var(--orange);display:grid;place-items:center;font-weight:900;flex:none}.step b{font-size:14px}.step p{margin:3px 0 0;color:var(--muted);font-size:12px;line-height:1.35}
+.review{background:#fff;border:1px solid var(--line);border-radius:17px;padding:16px}.stars{color:#f4a900;letter-spacing:2px}.review p{font-size:13px;line-height:1.5;color:#555;margin:8px 0}.review b{font-size:12px}
+.areas{display:flex;flex-wrap:wrap;gap:7px}.area{background:#fff;border:1px solid var(--line);padding:9px 11px;border-radius:20px;font-size:12px;color:#505864}.faq{border-top:1px solid var(--line)}details{background:#fff;border-bottom:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:800;font-size:14px}details p{color:var(--muted);font-size:12px;line-height:1.5;margin:9px 0 0}
+.footer{padding:28px 18px 10px;color:#747c87;text-align:center;font-size:11px}.footer b{color:#252a31;font-size:14px}.footer-links{display:flex;justify-content:center;gap:14px;margin-top:10px}.footer-links a{color:#555;font-weight:700}
+.bottom{position:fixed;z-index:50;bottom:0;left:50%;transform:translateX(-50%);width:min(760px,100%);background:#fff;border-top:1px solid var(--line);padding:9px 12px;display:grid;grid-template-columns:1fr 1fr;gap:9px}.bottom a{height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px}.call{background:var(--navy);color:#fff}.wa{background:var(--green);color:#fff}
+.estimate-float{position:fixed;z-index:60;right:14px;bottom:82px;background:var(--orange);color:#fff;border:0;border-radius:999px;padding:12px 16px;font-weight:900;box-shadow:0 10px 24px rgba(249,115,22,.3);cursor:pointer}.estimate-float small{display:block;font-size:9px;opacity:.9}.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;justify-content:center;z-index:100}.modal.show{display:flex}.sheet{width:min(760px,100%);background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 25px;max-height:90vh;overflow:auto}.sheet-head{display:flex;justify-content:space-between;align-items:center}.sheet h2{margin:0;font-size:21px}.close{border:0;background:#f1f2f4;width:36px;height:36px;border-radius:50%;font-size:20px}.form{display:grid;gap:10px;margin-top:15px}.form input,.form select,.form textarea{width:100%;border:1px solid #dfe2e7;border-radius:12px;padding:13px;outline:0;background:#fff}.form textarea{min-height:80px;resize:vertical}.submit{border:0;background:var(--teal);color:#fff;border-radius:13px;padding:14px;font-weight:900;font-size:16px;cursor:pointer}.form-note{font-size:10px;color:#8a919b;text-align:center}
+.stage{background:#dfe3e8}.stage img{transition:none}.stage.before:after,.stage.process:after,.stage.after:after{content:'';position:absolute;inset:0;pointer-events:none}.stage.before:after{background:linear-gradient(135deg,rgba(25,31,38,.18),rgba(25,31,38,.38))}.stage.process:after{background:linear-gradient(115deg,rgba(25,65,105,.28),rgba(255,255,255,.08) 48%,rgba(20,35,50,.28));}.stage.after:after{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,0))}.stage.process i{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#fff;font-style:normal;font-size:11px;font-weight:950;line-height:1.15;letter-spacing:.4px;text-shadow:0 2px 8px #000;background:linear-gradient(90deg,rgba(15,35,55,.22),rgba(15,35,55,.42),rgba(15,35,55,.18));z-index:2}.stage.before img{filter:saturate(.55) brightness(.72) contrast(1.08);transform:scale(1.02)}.stage.process img{filter:saturate(.72) brightness(.84) contrast(1.05);transform:scale(1.04)}.stage.after img{filter:saturate(1.22) brightness(1.12) contrast(1.04);transform:scale(1.01)}.stage span{z-index:3}
+@media(min-width:601px){.hero-img{height:330px}.service-list{grid-template-columns:1fr 1fr}.service-card:first-child{grid-column:span 2}.service-card:first-child .service-img{height:190px}.stage{height:155px}}
+@media(max-width:430px){.hero-img{height:205px}.hero h1{font-size:27px}.categories{gap:3px}.cat-icon{width:52px;height:52px}.cat span{font-size:11px}.section-title{margin-top:24px}.textures{gap:8px}.texture{height:140px}}
+.brand-mark{display:grid;place-items:center;font-weight:900;font-size:30px;background:#fff;border:1px solid #e5e7eb;color:#172033}
+</style>
+<style id="gm-premium-horizontal-redesign">
+:root{--gm-orange:#f97316;--gm-navy:#172033;--gm-line:#e8eaf0;--gm-muted:#687386}
+html{scroll-behavior:smooth} body{background:#f6f7f9!important;color:#172033!important}
+.header,.topbar,header{backdrop-filter:blur(14px)}
+.section{padding:22px 16px!important;margin:14px 12px!important;border-radius:22px!important;background:#fff;box-shadow:0 5px 22px #1720330a}
+.section h2{font-size:23px!important;letter-spacing:-.55px;line-height:1.15}
+.hero{border-radius:0 0 26px 26px;overflow:hidden}
+.hero h1{font-size:clamp(28px,7vw,42px)!important;line-height:1.08;letter-spacing:-1px}
+/* Compact side-scroll cards, inspired by service marketplaces */
+.catalog-grid,.service-list,.product-grid,.texture-grid,.gallery-grid,.project-grid,.category-grid,.brand-grid,.stage-grid{display:flex!important;flex-wrap:nowrap!important;gap:12px!important;overflow-x:auto!important;overflow-y:hidden!important;padding:3px 2px 14px!important;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#cbd0d9 transparent}
+.catalog-grid>* ,.service-list>* ,.product-grid>* ,.texture-grid>* ,.gallery-grid>* ,.project-grid>* ,.category-grid>* ,.brand-grid>* ,.stage-grid>*{flex:0 0 72%!important;max-width:300px!important;min-width:0;scroll-snap-align:start}
+.catalog-item,.service-card,.rental-card,.category-card,.product-card,.texture-card{border-radius:17px!important;overflow:hidden!important;box-shadow:0 4px 16px #1720330b!important;border:1px solid #e8eaf0!important}
+.catalog-item img,.service-img,.rental-card img,.category-card img,.product-card img,.texture-card img{height:126px!important;object-fit:cover!important;width:100%!important;display:block}
+.catalog-item{padding:0 0 12px!important;gap:7px!important}
+.catalog-item>*:not(img):not(.catalog-image){margin-left:12px;margin-right:12px}
+.catalog-item h3{font-size:14px!important;line-height:1.3!important}
+.catalog-price{font-size:18px!important}
+.service-card .service-img{height:142px!important}
+.service-body{padding:12px!important}.service-body h3{font-size:16px!important}.service-body p{font-size:12px!important}
+.rental-card{flex:0 0 78%!important;max-width:320px!important}
+.rental-card img{height:142px!important;object-fit:cover!important}
+button,.estimate-btn,.details-link{transition:transform .15s ease,filter .15s ease}
+button:active,.estimate-btn:active,.details-link:active{transform:scale(.98)}
+/* gallery image groups become neat thumbnail strips */
+.section img{max-width:100%}
+.stage{min-width:0!important}
+.stage img,.gallery img{height:112px!important;object-fit:cover!important;border-radius:12px!important}
+/* horizontal swipe hint */
+.catalog-intro:after{content:'  ← Swipe to explore →';display:inline-block;color:#f97316;font-weight:800;font-size:11px;margin-left:4px}
+@media(min-width:700px){.section{max-width:1120px;margin:22px auto!important;padding:28px!important}.catalog-grid>*,.service-list>*,.product-grid>*,.texture-grid>*,.gallery-grid>*,.project-grid>*,.category-grid>*,.brand-grid>*,.stage-grid>*{flex-basis:235px!important;max-width:260px!important}.hero{max-width:1160px;margin:18px auto!important;border-radius:26px}.rental-card{flex-basis:280px!important}}
+@media(max-width:420px){.section{padding:18px 13px!important;margin:10px 8px!important}.section h2{font-size:21px!important}.catalog-grid>* ,.service-list>* ,.product-grid>* ,.texture-grid>* ,.gallery-grid>* ,.project-grid>* ,.category-grid>* ,.brand-grid>* ,.stage-grid>*{flex-basis:78%!important}}
+</style>
+</head>
+<body>
+<div class="site">
+<header class="header">
+<a class="brand" href="#top"><img class="logo" src="logo.png" alt="GM Painting Service logo" width="43" height="43"><div>GM Painting Service<small>Professional Home Services</small></div></a>
+<a class="header-call" href="tel:+919958416811">☎ Call</a>
+</header>
+<main id="top">
+<section class="hero">
+<div class="city">📍 Bengaluru</div>
+<img alt="Modern painted living room" class="hero-img" decoding="async" src="gm-living-room.webp"/>
+<div class="hero-copy">
+<div class="eyebrow">Trusted home painting service</div>
+<h1>House Painting Company in Bengaluru</h1>
+<p>Interior, exterior, waterproofing, wood polishing and deep cleaning — managed from inspection to final clean-up.</p>
+<div class="trust-row"><div class="trust-stat"><b>500+</b><span>Homes Done</span></div><div class="trust-stat"><b>6+ Yrs</b><span>Experience</span></div><div class="trust-stat"><b>100%</b><span>Genuine Paint</span></div></div>
+</div>
+</section>
+<div class="search"><span class="search-icon">⌕</span><input id="searchInput" placeholder="Search painting, waterproofing, texture..." type="search"/></div>
+<div class="section quick-trust"><div class="offer" style="margin-top:12px;padding:12px 14px"><div class="offer-icon">✓</div><div><b>Professional • Transparent • Neat Work</b><span>Inspection • Surface preparation • Final clean-up</span></div></div></div>
+<section class="section">
+<div class="section-title"><h2>Painting</h2><a href="#services">View all</a></div>
+<div class="categories">
+<a class="cat" href="#interior"><div class="cat-icon">🏠</div><span>Interior<br/>Painting</span></a>
+<a class="cat" href="#exterior"><div class="cat-icon">🏢</div><span>Exterior<br/>Painting</span></a>
+<a class="cat" href="#rental"><div class="cat-icon">🔑</div><span>Rental<br/>Painting</span></a>
+<a class="cat" href="#waterproof"><div class="cat-icon">💧</div><span>Water<br/>Proofing</span></a>
+</div>
+<div class="offer"><div class="offer-icon">⚡</div><div><b>Get a clear estimate before work starts</b><span>Free site inspection • surface check • material recommendation</span></div></div>
+</section>
+<section class="section" id="catalog">
+<div id="catalogLanding">
+<div class="section-title"><h2>Painting &amp; Waterproofing</h2></div>
+<p class="catalog-intro">Choose the type of work you need. Explore packages, see starting prices and add extra services to your estimate.</p>
+<div class="pro-category-list">
+<button class="pro-category" onclick="openCatalogPage('rental')" type="button">
+<img alt="Furnished home interior" decoding="async" loading="lazy" src="gm-living-room.webp"/>
+<span><strong>Rental Home Painting</strong><small>Move-in / move-out painting · Furnished and unfurnished packages</small></span><b>›</b>
+</button>
+<button class="pro-category" onclick="openCatalogPage('makeover')" type="button">
+<img alt="Home makeover interior" decoding="async" loading="lazy" src="gm-living-room.webp"/>
+<span><strong>Home Makeover</strong><small>Interior &amp; exterior · Textures · Designer walls</small></span><b>›</b>
+</button>
+<button class="pro-category" onclick="openCatalogPage('rooms')" type="button">
+<img alt="Room painting" decoding="async" loading="lazy" src="gm-living-room.webp"/>
+<span><strong>Few Walls &amp; Rooms Painting</strong><small>Painting for selected rooms, walls, doors and grills</small></span><b>›</b>
+</button>
+<button class="pro-category" onclick="openCatalogPage('waterproof')" type="button">
+<img alt="Terrace waterproofing coating work by a painter" decoding="async" loading="lazy" src="gm-waterproofing.webp"/>
+<span><strong>Waterproofing &amp; Repairs</strong><small>Wall seepage · Terrace · Tile grouting · Surface repair</small></span><b>›</b>
+</button>
+</div>
+</div>
+<div class="catalog-page" id="rentalPage" style="display:none">
+<button class="catalog-back" onclick="closeCatalogPage()" type="button">‹ <span>All services</span></button>
+<div class="catalog-page-heading"><h2>Rental Home Painting</h2><p>Choose your home size, then compare furnished and unfurnished packages.</p></div>
+<div class="bhk-tabs">
+<button class="active" onclick="setBhk('1',this)" type="button">1 BHK</button>
+<button onclick="setBhk('2',this)" type="button">2 BHK</button>
+<button onclick="setBhk('3',this)" type="button">3 BHK</button>
+<button onclick="setBhk('4',this)" type="button">4 BHK</button>
+</div>
+<div class="rental-cards" id="rentalCards"></div>
+<div id="damageStep" style="display:none;margin:16px 0"><div class="section-title"><h2>Is there any damage on your walls?</h2></div><p style="font-size:13px;color:#667085;margin:0 0 10px">Small repairs are free. Choose what matches your home.</p><button class="dmg-btn" type="button" onclick="setDamage('none',this)">No damage — Free</button><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><button class="dmg-btn" type="button" onclick="setDamage('minor',this)"><img src="gm-minor-damage.webp" alt="Wall with small peeling patches and minor paint damage" loading="lazy"><b>Minor damage</b><small>Small cracks, nail holes, patches</small><strong style="color:#15803d">FREE</strong></button><button class="dmg-btn" type="button" onclick="setDamage('major',this)"><img src="gm-seepage.webp" alt="Ceiling and wall seepage with damp stains and peeling paint" loading="lazy"><b>Major damage / seepage</b><small>Dampness, peeling, seepage patches</small><strong>+ ₹1,999</strong></button></div></div><div id="rentalExtras" style="display:none"><div class="section-title"><h2>Add extra services</h2></div>
+<div class="catalog-grid">
+<article class="catalog-item"><img alt="Door Painting service photo showing the work" decoding="async" loading="lazy" src="gm-door-polishing.webp"/><h3>Door Painting</h3><p>Add door painting to your rental package.</p><div class="catalog-price">₹1,199<small>Starting price</small></div><button class="add-service" data-id="door" data-name="Door Painting" data-price="1199" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Grill Painting service photo showing the work" decoding="async" loading="lazy" src="gm-grill-painting.webp"/><h3>Grill Painting</h3><p>Metal grill painting; size and rust condition matter.</p><div class="catalog-price">₹999<small>Starting price</small></div><button class="add-service" data-id="grill" data-name="Grill Painting" data-price="999" onclick="toggleCartItem(this)">＋ Add</button></article><article class="catalog-item"><img alt="Cabinet painting service photo showing a worker repainting kitchen cabinets" decoding="async" loading="lazy" src="gm-cabinet-painting.webp"/><h3>Cabinet Painting</h3><p>Repaint kitchen cabinets and storage units; final scope depends on material, surface preparation and finish.</p><div class="catalog-price">₹999<small>Starting price</small></div><button class="add-service" data-id="cabinet" data-name="Cabinet Painting" data-price="999" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Wooden furniture and wood finish reference" decoding="async" loading="lazy" src="gm-wood-polishing.webp"/><h3>Wood Polishing</h3><p>Wooden doors, frames, wardrobes and furniture. Includes surface inspection, sanding/preparation and a suitable polish or finish as agreed in the estimate.</p><div class="catalog-price">Site estimate<small>Depends on size and finish</small></div><button class="add-service" data-id="woodpolish" data-name="Wood Polishing" data-price="0" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Metal gate and grill painting service photo" decoding="async" loading="lazy" src="gm-grill-painting.webp"/><h3>Metal Gate/Shutter Painting</h3><p>Metal gate or shutter repainting. Rust removal, primer and finish depend on surface condition.</p><div class="catalog-price">₹1,499<small>Starting price</small></div><button class="add-service" data-id="gateshutter" data-name="Metal Gate/Shutter Painting" data-price="1499" onclick="toggleCartItem(this)">＋ Add</button></article><article class="catalog-item"><img alt="Window Painting service photo" decoding="async" loading="lazy" src="gm-door-polishing.webp"/><h3>Window Painting</h3><p>Window frames and grills painted to match your home.</p><div class="catalog-price">Site estimate<small>Depends on size and condition</small></div><button class="add-service" data-id="window" data-name="Window Painting" data-price="0" onclick="toggleCartItem(this)">＋ Add</button></article><article class="catalog-item"><img alt="Chimney Hood Polish service photo" decoding="async" loading="lazy" src="gm-chimney-cleaning.webp"/><h3>Chimney Hood Polish</h3><p>Polish and clean-up of kitchen chimney hood.</p><div class="catalog-price">Site estimate<small>Depends on size and condition</small></div><button class="add-service" data-id="hood" data-name="Chimney Hood Polish" data-price="0" onclick="toggleCartItem(this)">＋ Add</button></article></div></div>
+</div>
+<div class="catalog-page" id="makeoverPage" style="display:none">
+<button class="catalog-back" onclick="closeCatalogPage()" type="button">‹ <span>All services</span></button>
+<div class="catalog-page-heading"><h2>Home Makeover</h2><p>Interior &amp; exterior painting, textures, moulding and designer panels. Custom quotation after understanding your design and area.</p></div>
+<div class="catalog-grid">
+<article class="catalog-item"><img alt="Interior Painting service photo showing the work" decoding="async" loading="lazy" src="gm-living-room.webp"/><h3>Interior Painting</h3><p>Walls and ceilings across your home.</p><div class="catalog-price">Site estimate<small>Based on area and paint system</small></div><button class="add-service" data-id="interior" data-name="Interior Painting" data-price="0" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Exterior Painting service photo showing the work" decoding="async" loading="lazy" src="gm-exterior-house.webp"/><h3>Exterior Painting</h3><p>Exterior walls and weather-resistant finish.</p><div class="catalog-price">Site estimate<small>Based on area and condition</small></div><button class="add-service" data-id="exterior" data-name="Exterior Painting" data-price="0" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Designer texture finish on an interior wall" decoding="async" loading="lazy" src="gm-texture-wall.webp"/><h3>Texture &amp; Designer Wall</h3><p>Decorative texture, feature walls and modern accent finishes. Final price depends on selected design, wall area and material; confirm the finish and sample before work starts.</p><div class="catalog-price">Site estimate<small>Based on design and area</small></div><button class="add-service" data-id="texture" data-name="Texture &amp; Designer Wall" data-price="0" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Wood polishing for doors and furniture" decoding="async" loading="lazy" src="gm-wood-polishing.webp"/><h3>Wood Polishing</h3><p>Polishing for doors, frames, wardrobes and wooden surfaces. Sanding, preparation and final finish are confirmed in the written estimate.</p><div class="catalog-price">Site estimate<small>Based on finish and area</small></div><button class="add-service" data-id="woodpolish2" data-name="Wood Polishing" data-price="0" onclick="toggleCartItem(this)">＋ Add</button></article>
+</div>
+</div>
+<div class="catalog-page" id="roomsPage" style="display:none">
+<button class="catalog-back" onclick="closeCatalogPage()" type="button">‹ <span>All services</span></button>
+<div class="catalog-page-heading"><h2>Few Walls &amp; Rooms Painting</h2><p>Choose only the rooms or surfaces you want painted.</p></div>
+<div class="catalog-grid">
+<article class="catalog-item"><img alt="Painter applying fresh paint to a single feature wall in an Indian home" decoding="async" loading="lazy" src="gm-single-wall.webp"/><h3>1 Wall Painting</h3><p>Fresh paint for one wall. Final price depends on wall size, paint and surface preparation.</p><div class="catalog-price">₹1,499<small>Starting price</small></div><button class="add-service" data-id="wall1" data-name="1 Wall Painting" data-price="1499" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Professional painter preparing and painting walls in a living room" decoding="async" loading="lazy" src="gm-multiple-walls.webp"/><h3>2+ Walls Painting</h3><p>Painting for two or more walls. Final price depends on total area and surface condition.</p><div class="catalog-price">₹2,999<small>Starting price</small></div><button class="add-service" data-id="wall2" data-name="2 or More Walls Painting" data-price="2999" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Bedroom Painting service photo showing the work" decoding="async" loading="lazy" src="gm-bedroom.webp"/><h3>Bedroom Painting</h3><p>Refresh a bedroom with new paint.</p><div class="catalog-price">₹4,499<small>Starting price</small></div><button class="add-service" data-id="bedroom" data-name="Bedroom Painting" data-price="4499" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Living Room Painting service photo showing the work" decoding="async" loading="lazy" src="gm-living-room.webp"/><h3>Living Room Painting</h3><p>Freshen up your living room.</p><div class="catalog-price">₹5,999<small>Starting price</small></div><button class="add-service" data-id="living" data-name="Living Room Painting" data-price="5999" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Kitchen Painting service photo showing the work" decoding="async" loading="lazy" src="gm-kitchen-painting.webp"/><h3>Kitchen Painting</h3><p>Kitchen wall painting package.</p><div class="catalog-price">₹3,499<small>Starting price</small></div><button class="add-service" data-id="kitchen" data-name="Kitchen Painting" data-price="3499" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Bathroom Painting service photo showing the work" decoding="async" loading="lazy" src="gm-bathroom-painting.webp"/><h3>Bathroom Painting</h3><p>Final scope depends on surface and moisture condition.</p><div class="catalog-price">₹1,999<small>Starting price</small></div><button class="add-service" data-id="bathroom" data-name="Bathroom Painting" data-price="1999" onclick="toggleCartItem(this)">＋ Add</button></article>
+</div>
+</div>
+<div class="catalog-page" id="waterproofPage" style="display:none">
+<button class="catalog-back" onclick="closeCatalogPage()" type="button">‹ <span>All services</span></button>
+<div class="catalog-page-heading"><h2>Waterproofing &amp; Repairs</h2><p>For seepage, peeling paint and damaged areas. Active leakage and damaged surfaces must be inspected before final pricing.</p></div>
+<div class="catalog-grid">
+<article class="catalog-item"><img alt="Wall Waterproofing service photo showing the work" decoding="async" loading="lazy" src="gm-exterior-wall.webp"/><h3>Wall Waterproofing</h3><p>For dampness and seepage; active leakage needs inspection.</p><div class="catalog-price">₹3,998<small>Starting price</small></div><button class="add-service" data-id="wallwater" data-name="Wall Waterproofing" data-price="3998" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Worker applying waterproofing coating to a rooftop terrace" decoding="async" loading="lazy" src="gm-waterproofing.webp"/><h3>Terrace Waterproofing</h3><p>Rate is calculated by measured terrace area; final quote depends on cracks, surface preparation and coating system.</p><div class="catalog-price">₹25–₹30<small>Per sq. ft. · final rate after inspection</small></div><div class="terrace-estimator"><label>Terrace area (sq. ft.)<input aria-label="Terrace area in square feet" class="terrace-area-input" inputmode="numeric" min="1" placeholder="e.g. 500" step="1" type="number"/></label><label>Rate per sq. ft.<select aria-label="Rate per square foot" class="terrace-rate-input"><option value="25">₹25 / sq. ft.</option><option value="30">₹30 / sq. ft.</option></select></label></div><button class="add-service" data-id="terracewater" data-name="Terrace Waterproofing" data-price="0" onclick="addTerraceEstimate(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Tile Grouting &amp; Re-Grouting service photo showing the work" decoding="async" loading="lazy" src="gm-tile-grouting.webp"/><h3>Tile Grouting &amp; Re-Grouting</h3><p>Tile joint repair and re-grouting package.</p><div class="catalog-price">₹2,399<small>Starting price</small></div><button class="add-service" data-id="grout" data-name="Tile Grouting &amp; Re-Grouting" data-price="2399" onclick="toggleCartItem(this)">＋ Add</button></article>
+<article class="catalog-item"><img alt="Swimming Pool Coating &amp; Waterproofing service photo showing the work" decoding="async" loading="lazy" src="gm-pool-coating.webp"/><h3>Swimming Pool Coating &amp; Waterproofing</h3><p>Pool coating; site inspection required.</p><div class="catalog-price">Site estimate<small>Based on pool size and condition</small></div><button class="add-service" data-id="pool" data-name="Swimming Pool Coating &amp; Waterproofing" data-price="0" onclick="toggleCartItem(this)">＋ Add</button></article>
+</div>
+</div>
+<div aria-live="polite" class="cart-box" id="cartBox">
+<h3>🧾 Your Estimate</h3>
+<div id="cartItems"><p class="cart-empty">No services added yet. Tap “Add” beside a package or service.</p></div>
+<div class="cart-total"><span>Estimated total</span><b id="cartTotal">₹0</b></div>
+<p class="cart-note">Starting estimates only. Final price depends on measurements, surface condition, materials and confirmed scope. Site-estimate services are quoted after inspection.</p>
+<button class="cart-book" onclick="bookCartEstimate()" type="button">Book Consultation (₹35)</button>
+</div>
+<div class="paint-spec-panel">
+<h3>What is included in GM Painting Service packages?</h3>
+<p class="paint-spec-lead">We confirm the exact paint brand, product range and quantity with you before work starts. We will not silently substitute a cheaper paint.</p>
+<div class="paint-spec-grid">
+<div><b>01 · Surface preparation</b><span>Basic scraping of loose paint, sanding and minor patch/crack filling as agreed after inspection.</span></div>
+<div><b>02 · Primer &amp; putty</b><span>Primer and putty are included only to the extent listed in the final written quotation. Full-wall putty or major plaster repair may cost extra.</span></div>
+<div><b>03 · Paint coats</b><span>Standard package proposal: 1 primer coat where required and 2 finish coats. Exact system depends on the wall condition and selected paint.</span></div>
+<div><b>04 · Paint brand choice</b><span>Asian Paints, Berger or Dulux can be quoted in the selected range. The specific product name and finish (economy, premium, washable, etc.) will be written in the quote before booking.</span></div>
+<div><b>05 · Protection &amp; clean-up</b><span>Basic masking/protection of nearby fixtures and a work-area clean-up are included when stated in the confirmed scope.</span></div>
+<div><b>06 · Not included by default</b><span>Major seepage treatment, active leakage, extensive putty/plaster repair, texture, doors, grills, cabinets, balcony/exterior and furniture shifting are separate unless explicitly listed.</span></div>
+</div>
+<p class="paint-spec-note">Final material, product, preparation, included rooms and exclusions are confirmed in writing before work begins.</p>
+</div>
+<div aria-modal="true" class="package-detail-modal" id="packageDetailModal" role="dialog" style="display:none">
+<div class="package-detail-sheet"><button class="package-detail-close" onclick="closePackageDetails()" type="button">×</button><p class="catalog-badge">PACKAGE DETAILS</p><h3 id="detailTitle"></h3><div class="catalog-price" id="detailPrice"></div><p id="detailDescription" style="white-space:pre-line"></p><button class="cart-book" onclick="closePackageDetails()" type="button">Choose package</button></div>
+</div>
+</section>
+<section class="section" id="services">
+<div class="section-title"><h2>Services We Offer</h2></div>
+<div class="service-list">
+<article class="service-card" data-search="interior painting 1bhk 2bhk living room bedroom" id="interior"><img alt="Interior Painting service photo showing work by a painter" class="service-img" decoding="async" loading="lazy" src="gm-living-room.webp"/><div class="service-body"><h3>Interior Painting</h3><p>1BHK, 2BHK and complete home interiors with neat masking, wall preparation and premium finishes.</p><div class="service-foot"><span class="pill">Home Interior</span><button class="estimate-btn" onclick="openForm('Interior Painting')">Get Estimate</button></div></div></article>
+<article class="service-card" data-search="exterior painting house building weather resistant" id="exterior"><img alt="Exterior Painting service photo showing work by a painter" class="service-img" decoding="async" loading="lazy" src="gm-exterior-house.webp"/><div class="service-body"><h3>Exterior Painting</h3><p>Exterior wall preparation and weather-resistant painting for homes and buildings.</p><div class="service-foot"><span class="pill">Exterior</span><button class="estimate-btn" onclick="openForm('Exterior Painting')">Get Estimate</button></div></div></article>
+<article class="service-card" data-search="rental painting repainting tenant move out" id="rental"><img alt="Rental / Repainting service photo showing work by a painter" class="service-img" decoding="async" loading="lazy" src="gm-bedroom.webp"/><div class="service-body"><h3>Rental / Repainting</h3><p>Quick refresh for rental handover, move-in and move-out painting requirements.</p><div class="service-foot"><span class="pill">Rental</span><button class="estimate-btn" onclick="openForm('Rental Painting')">Get Estimate</button></div></div></article>
+<article class="service-card" data-search="waterproofing roof leak crack luminx reflective coating" id="waterproof"><img alt="Roof Waterproofing + Reflective Coating service photo showing work by a painter" class="service-img" decoding="async" loading="lazy" src="gm-terrace-waterproofing.webp"/><div class="service-body"><h3>Roof Waterproofing + Reflective Coating</h3><p>Crack treatment, waterproofing system and suitable reflective/protective roof coating after inspection.</p><div class="service-foot"><span class="pill">Roof Care</span><button class="estimate-btn" onclick="openForm('Roof Waterproofing')">Get Estimate</button></div></div></article>
+<article class="service-card" data-search="texture designer wall canvas colourwash"><img alt="Texture &amp; Designer Walls service photo showing work by a painter" class="service-img" decoding="async" loading="lazy" src="gm-texture-finish.webp"/><div class="service-body"><h3>Texture &amp; Designer Walls</h3><p>Feature walls, texture finishes and decorative painting options for modern interiors.</p><div class="service-foot"><span class="pill">Textures</span><button class="estimate-btn" onclick="openForm('Texture &amp; Designer Walls')">Get Estimate</button></div></div></article>
+<article class="service-card" data-search="wood polishing door furniture polish"><img alt="Wood Polishing service photo showing work by a painter" class="service-img" decoding="async" loading="lazy" src="gm-wood-polishing-detail.webp"/><div class="service-body"><h3>Wood Polishing</h3><p>Doors, frames and wooden surfaces with sanding, preparation and polishing for a clean finish.</p><div class="service-foot"><span class="pill">Wood Care</span><button class="estimate-btn" onclick="openForm('Wood Polishing')">Get Estimate</button></div></div></article>
+<article class="service-card" data-search="kitchen chimney deep cleaning grease"><img alt="Kitchen &amp; Chimney Deep Cleaning service photo showing work by a painter" class="service-img" decoding="async" loading="lazy" src="gm-chimney-cleaning.webp"/><div class="service-body"><h3>Kitchen &amp; Chimney Deep Cleaning</h3><p>Grease, oil and smoke cleaning for kitchens and chimney areas.</p><div class="service-foot"><span class="pill">Deep Cleaning</span><button class="estimate-btn" onclick="openForm('Kitchen &amp; Chimney Cleaning')">Get Estimate</button></div></div></article>
+<article class="service-card" data-search="luminx roof coating heat reflective roof"><img alt="Fresh waterproofing coating applied on a rooftop terrace" class="service-img" decoding="async" loading="lazy" src="gm-waterproofing.webp"/><div class="service-body"><h3>Reflective Roof Coating</h3><p>Protective/reflective top-coat option for suitable roof surfaces, subject to inspection and product availability.</p><div class="service-foot"><span class="pill">LuminX Option</span><button class="estimate-btn" onclick="openForm('Reflective Roof Coating')">Get Estimate</button></div></div></article>
+</div>
+</section>
+<section class="section">
+<div class="section-title"><h2>Products &amp; Paint Brands</h2></div>
+<div class="products">
+<div class="product"><div class="product-img brand-mark">AP</div><b>Asian Paints</b><small>Paint systems</small></div>
+<div class="product"><div class="product-img brand-mark">B</div><b>Berger</b><small>Paint systems</small></div>
+<div class="product"><div class="product-img brand-mark">D</div><b>Dulux</b><small>Paint systems</small></div>
+<div class="product"><div class="product-img brand-mark">N</div><b>Nerolac</b><small>Paint systems</small></div>
+<div class="product"><div class="product-img brand-mark">DF</div><b>Dr. Fixit</b><small>Waterproofing</small></div>
+<div class="product"><div class="product-img brand-mark">LX</div><b>LuminX</b><small>Roof coating option</small></div>
+<p style="font-size:10px;color:#8a919b;margin:10px 0 0">Brand/product selection depends on the surface, condition and site requirement. Confirm the exact product during quotation.</p>
+</div></section>
+<section class="section">
+<div class="section-title"><h2>Explore Textures</h2><a href="#" onclick='openForm("Texture &amp; Designer Walls"); return false;'>Get Quote</a></div><p class="section-subtitle">Swipe sideways to browse finish ideas. Actual colour and texture can vary by product, lighting and wall condition; request a sample before approval.</p>
+<div class="textures"><div class="texture"><img alt="Canvas texture" decoding="async" loading="lazy" src="gm-texture-wall.webp"/><span>Canvas</span></div><div class="texture"><img alt="Colourwash texture" decoding="async" loading="lazy" src="gm-texture-wall.webp"/><span>Colourwash</span></div><div class="texture"><img alt="Designer texture" decoding="async" loading="lazy" src="gm-texture-wall.webp"/><span>Designer</span></div><div class="texture"><img alt="Feature wall" decoding="async" loading="lazy" src="gm-texture-wall.webp"/><span>Feature Wall</span></div></div>
+</section>
+<section class="section">
+<div class="section-title"><h2>Service Photo Gallery</h2><span style="font-size:11px;color:#68707d;font-weight:800">Consistent visual transformation references</span></div>
+<div class="project-list"><article class="project"><h3>Interior &amp; Living Room Painting</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Interior &amp; Living Room Painting representative service photo" decoding="async" loading="lazy" src="gm-living-room.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Exterior House Painting</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Exterior House Painting representative service photo" decoding="async" loading="lazy" src="gm-exterior-house.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Bedroom Painting</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Bedroom Painting representative service photo" decoding="async" loading="lazy" src="gm-bedroom.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Door &amp; Wood Polishing</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Door &amp; Wood Polishing representative service photo" decoding="async" loading="lazy" src="gm-door-polishing.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Kitchen Painting</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Kitchen Painting representative service photo" decoding="async" loading="lazy" src="gm-kitchen-painting.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Terrace Waterproofing</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Terrace Waterproofing representative service photo" decoding="async" loading="lazy" src="gm-terrace-waterproofing.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Tile Grouting</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Tile Grouting representative service photo" decoding="async" loading="lazy" src="gm-tile-grouting.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Swimming Pool Coating</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Swimming Pool Coating representative service photo" decoding="async" loading="lazy" src="gm-pool-coating.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Texture &amp; Designer Wall</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Texture &amp; Designer Wall representative service photo" decoding="async" loading="lazy" src="gm-texture-finish.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Grill Painting</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Grill Painting representative service photo" decoding="async" loading="lazy" src="gm-grill-painting.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Balcony Painting</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Balcony Painting representative service photo" decoding="async" loading="lazy" src="gm-balcony-painting.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article><article class="project"><h3>Kitchen &amp; Chimney Cleaning</h3><div class="project-row service-photo-row"><div class="stage"><img alt="Kitchen &amp; Chimney Cleaning representative service photo" decoding="async" loading="lazy" src="gm-chimney-cleaning.webp"/></div></div><p class="sample-note">Representative service photo. Ask GM Painting Service for actual project photos and a site estimate.</p></article></div>
+<p class="sample-note">Representative service images are provided to help customers understand each service. These are not claimed as actual GM Painting Service customer projects.</p>
+</section>
+<section class="section">
+<div class="promise"><h2>GM Painting Promise</h2><div class="promise-grid"><div class="promise-item">✓ Surface Preparation<small>Proper cleaning, putty/repair where required</small></div><div class="promise-item">✓ Neat Work<small>Masking, covering and clean-up</small></div><div class="promise-item">✓ Genuine Materials<small>Suitable branded products</small></div><div class="promise-item">✓ Clear Estimate<small>Discuss scope before work starts</small></div></div></div>
+</section>
+<section class="section">
+<div class="section-title"><h2>How It Works</h2></div>
+<div class="steps"><div class="step"><div class="num">1</div><div><b>Book inspection</b><p>Share your requirement by call or WhatsApp and choose a convenient visit.</p></div></div><div class="step"><div class="num">2</div><div><b>Site check &amp; estimate</b><p>We check surface condition, scope and material requirements.</p></div></div><div class="step"><div class="num">3</div><div><b>Work starts</b><p>Painting or service work is completed with protection and preparation.</p></div></div><div class="step"><div class="num">4</div><div><b>Final check &amp; clean-up</b><p>Area is checked and cleaned before handover.</p></div></div></div>
+</section>
+<section class="section">
+<div class="section-title"><h2>Customer Feedback</h2></div>
+<div class="review"><div class="stars">★★★★★</div><p>“Neat painting work and good communication. The team kept the area covered and cleaned up after the job.”</p><b>— GM Painting customer</b></div>
+</section>
+<section class="section">
+<div class="section-title"><h2>Service Areas</h2><span style="font-size:11px;color:#68707d;font-weight:800">Within ~30 km of Banashankari</span></div>
+<div class="areas"><span class="area">Banashankari</span><span class="area">JP Nagar</span><span class="area">Jayanagar</span><span class="area">BTM Layout</span><span class="area">HSR Layout</span><span class="area">Koramangala</span><span class="area">Basavanagudi</span><span class="area">Gandhi Bazaar</span><span class="area">Wilson Garden</span><span class="area">Lalbagh</span><span class="area">Vijayanagar</span><span class="area">Rajajinagar</span><span class="area">Malleshwaram</span><span class="area">Yeshwanthpur</span><span class="area">Nagarbhavi</span><span class="area">Kengeri</span><span class="area">Uttarahalli</span><span class="area">Padmanabhanagar</span><span class="area">Kumaraswamy Layout</span><span class="area">Arekere</span><span class="area">Hulimavu</span><span class="area">Begur</span><span class="area">Electronic City</span><span class="area">Bommanahalli</span><span class="area">HSR</span><span class="area">Sarjapur</span><span class="area">Bellandur</span><span class="area">Marathahalli</span><span class="area">Whitefield</span><span class="area">Indiranagar</span><span class="area">Domlur</span><span class="area">Ejipura</span><span class="area">BTM</span><span class="area">JP Nagar Phase 1–8</span><span class="area">Jayanagar 1st–9th Block</span><span class="area">and nearby Bengaluru areas</span></div>
+</section>
+<section class="section" id="seo-services"><h2>Painting Services in Bengaluru</h2><div style="display:flex;flex-wrap:wrap;gap:8px"><a href="/rental-home-painting-bengaluru" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">Rental Home Painting in Bengaluru</a><a href="/home-owner-painting-bengaluru" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">Home Owner Painting in Bengaluru</a><a href="/interior-painting-bengaluru" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">Interior Painting in Bengaluru</a><a href="/exterior-painting-bengaluru" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">Exterior Painting in Bengaluru</a><a href="/waterproofing-bengaluru" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">Waterproofing in Bengaluru</a><a href="/wood-polishing-bengaluru" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">Wood Polishing in Bengaluru</a><a href="/tile-grouting-bengaluru" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">Tile Grouting in Bengaluru</a><a href="/texture-painting-bengaluru" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">Texture Painting in Bengaluru</a><a href="/about-gm-painting-service" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">About us</a><a href="/contact-gm-painting-service" style="padding:9px 13px;border:1px solid #dfe3e9;border-radius:999px;background:#fff;font-weight:700;font-size:13px;text-decoration:none">Contact</a></div></section>
+<section class="section" id="faq">
+<div class="section-title"><h2>FAQs</h2></div><div class="faq"><details><summary>Do you provide a site inspection?</summary><p>Yes. The requirement can be discussed over call/WhatsApp and the site can be inspected before a final estimate.</p></details><details><summary>Which paint brands do you use?</summary><p>We can work with suitable branded paint systems such as Asian Paints, Berger, Dulux and Nerolac, depending on the project requirement.</p></details><details><summary>Do you do roof waterproofing?</summary><p>Yes. Roof crack treatment and waterproofing/coating options are available after checking the roof condition.</p></details><details><summary>Can I send photos for an initial estimate?</summary><p>Yes. Send clear photos/videos of the walls, roof or work area on WhatsApp for an initial discussion.</p></details></div>
+</section>
+<footer class="footer"><b>GM Painting Service</b><br/>Professional Home Painting &amp; Home Services in Bengaluru<div class="footer-links"><a href="tel:+919958416811">Call</a><a href="https://wa.me/919958416811" target="_blank">WhatsApp</a><a href="#faq">FAQ</a></div><div style="margin-top:12px">© 2026 GM Painting Service. All rights reserved.</div></footer>
+</main>
+<button class="estimate-float" onclick="openForm('')">🎁 Free Estimate<small>Book a free site visit</small></button>
+<div class="bottom"><a class="call" href="tel:+919958416811">☎ Call Now</a><a class="wa" href="https://wa.me/919958416811?text=Hi%20GM%20Painting%2C%20I%20need%20a%20painting%20estimate." target="_blank">💬 WhatsApp</a></div>
+<div class="package-detail-modal" id="consultationModal" role="dialog" aria-modal="true" aria-labelledby="consultationTitle" style="display:none"><div class="package-detail-sheet" style="max-height:92vh;overflow:auto"><button class="package-detail-close" onclick="closeConsultation()" type="button">×</button><p class="catalog-badge">₹35 CONSULTATION BOOKING</p><h3 id="consultationTitle">Book a Consultation</h3><p>Fill your details, choose a time, then pay the ₹35 consultation fee. Your booking reaches us on WhatsApp.</p><div class="form" style="display:grid;gap:9px"><input id="consultName" autocomplete="name" placeholder="Your name" required><input id="consultPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Mobile number" required><input id="consultArea" autocomplete="address-level2" placeholder="Area / locality in Bengaluru" required><input id="consultFlat" autocomplete="address-line1" placeholder="Flat / house number, building name" required><textarea id="consultService" rows="3" placeholder="Selected services" style="display:block;width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;margin-top:5px"></textarea><label style="font-size:12px;font-weight:800">Preferred date <input id="consultDay" type="date" required style="display:block;width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;margin-top:5px"></label><label style="font-size:12px;font-weight:800">When are you free? Our partner will call / visit in this time<select id="consultSlot" required style="display:block;width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;margin-top:5px"><option value="">Choose a time</option><option>10:00 AM–12:00 PM</option><option>12:00 PM–2:00 PM</option><option>2:00 PM–4:00 PM</option><option>4:00 PM–6:00 PM</option><option>6:00 PM–8:00 PM</option><option>8:00 PM–8:30 PM</option></select></label><div style="text-align:center;border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin:6px 0"><img src="consultation-qr.png" alt="PhonePe UPI QR code for consultation fee" style="display:block;width:100%;max-width:260px;margin:auto;border-radius:8px"><b style="display:block;margin-top:8px">Pay ₹35 · PhonePe / UPI</b><div>UPI ID: 9958416811@axl</div><small>After paying, enter the transaction UTR below. Payment is verified manually before booking is confirmed.</small></div><label style="font-size:12px;font-weight:800">Transaction ID / UTR<input id="consultUtr" placeholder="Enter PhonePe / UPI UTR" required style="display:block;width:100%;padding:10px;border:1px solid #ddd;border-radius:9px;margin-top:5px"></label><button class="cart-book" onclick="sendConsultation()" type="button">Send Booking on WhatsApp</button></div></div></div>
+<div class="modal" id="modal"><div class="sheet"><div class="sheet-head"><h2>Get Your Estimate</h2><button class="close" onclick="closeForm()">×</button></div><div class="form"><select id="service"><option value="">Select service</option><option>Interior Painting</option><option>Exterior Painting</option><option>Rental Painting</option><option>Roof Waterproofing</option><option>Texture &amp; Designer Walls</option><option>Wood Polishing</option><option>Kitchen &amp; Chimney Cleaning</option><option>Reflective Roof Coating</option></select><input id="name" placeholder="Your name"/><input id="phone" inputmode="tel" placeholder="Mobile number"/><input id="area" placeholder="Area / locality in Bengaluru"/><textarea id="details" placeholder="Tell us about your requirement"></textarea><button class="submit" onclick="sendWhatsApp()">Get Estimate on WhatsApp</button><div class="form-note">By continuing, WhatsApp will open with the details you entered.</div></div></div></div>
+<script>
+const modal=document.getElementById('modal');
+function openForm(service){modal.classList.add('show');document.getElementById('service').value=service||'';setTimeout(()=>document.getElementById('name').focus(),150)}
+function closeForm(){modal.classList.remove('show')}
+modal.addEventListener('click',e=>{if(e.target===modal)closeForm()});
+function sendWhatsApp(){const service=document.getElementById('service').value||'Painting Service';const name=document.getElementById('name').value.trim();const phone=document.getElementById('phone').value.trim();const area=document.getElementById('area').value.trim();const details=document.getElementById('details').value.trim();if(!name||!phone){alert('Please enter your name and mobile number.');return}const msg=`Hi GM Painting Service, I need an estimate.\n\nService: ${service}\nName: ${name}\nMobile: ${phone}\nArea: ${area||'Bengaluru'}\nRequirement: ${details||'Please call me.'}`;window.open('https://wa.me/919958416811?text='+encodeURIComponent(msg),'_blank')}
+setTimeout(()=>{if(!sessionStorage.getItem('gmEstimateShown')){openForm('');sessionStorage.setItem('gmEstimateShown','1')}},8000);
+const input=document.getElementById('searchInput');const cards=[...document.querySelectorAll('.service-card')];input.addEventListener('input',()=>{const q=input.value.toLowerCase().trim();cards.forEach(c=>c.style.display=!q||c.dataset.search.includes(q)?'block':'none')});
+
+
+function openCatalogPage(which){
+  document.getElementById('catalogLanding').style.display='none';
+  ['rental','makeover','rooms','waterproof'].forEach(k=>document.getElementById(k+'Page').style.display=k===which?'block':'none');
+  document.getElementById('catalog').scrollIntoView({behavior:'smooth',block:'start'});
+  if(which==='rental') setBhk('1',document.querySelector('.bhk-tabs button'));
+}
+function closeCatalogPage(){
+  document.querySelectorAll('.catalog-page').forEach(p=>p.style.display='none');
+  document.getElementById('catalogLanding').style.display='block';
+  document.getElementById('catalog').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function setBhk(bhk,btn){
+  document.querySelectorAll('.bhk-tabs button').forEach(b=>b.classList.toggle('active',b===btn));
+  document.querySelectorAll('#rentalCards .rental-card').forEach(card=>card.style.display=card.dataset.bhk===bhk?'grid':'none');
+}
+function showPackageDetails(title,price,description){
+  document.getElementById('detailTitle').textContent=title;
+  document.getElementById('detailPrice').textContent=price;
+  document.getElementById('detailDescription').textContent=description;
+  document.getElementById('packageDetailModal').style.display='flex';
+}
+function closePackageDetails(){document.getElementById('packageDetailModal').style.display='none';}
+
+const gmCart = new Map();
+const rentalRates={
+  '1':{unfurnished:{'Tractor Emulsion':8999,'Apcolite Premium':11999,'Royale Luxury':14999},furnished:{'Tractor Emulsion':9999,'Apcolite Premium':12999,'Royale Luxury':15999}},
+  '2':{unfurnished:{'Tractor Emulsion':13999,'Apcolite Premium':17999,'Royale Luxury':20999},furnished:{'Tractor Emulsion':14999,'Apcolite Premium':18999,'Royale Luxury':21999}},
+  '3':{unfurnished:{'Tractor Emulsion':17999,'Apcolite Premium':21999,'Royale Luxury':26999},furnished:{'Tractor Emulsion':18999,'Apcolite Premium':22999,'Royale Luxury':27999}},
+  '4':{unfurnished:{'Tractor Emulsion':null,'Apcolite Premium':null,'Royale Luxury':null},furnished:{'Tractor Emulsion':null,'Apcolite Premium':null,'Royale Luxury':null}}
+};
+function buildRentalCards(){
+ const host=document.getElementById('rentalCards'); if(!host)return;
+ host.innerHTML='';
+ ['unfurnished','furnished'].forEach(f=>{
+  ['1','2','3','4'].forEach(b=>{
+   const title=(f==='furnished'?'Furnished ':'Unfurnished ')+b+' BHK';
+   const starting=rentalRates[b][f]['Tractor Emulsion'];
+   const card=document.createElement('article'); card.className='rental-card'; card.dataset.bhk=b;card.dataset.furnish=f;card.style.display=b==='1'?'grid':'none';
+   const img=b==='1'?(f==='furnished'?'gm-bedroom.webp':'gm-single-wall.webp'):(f==='furnished'?'gm-living-room.webp':'gm-bedroom.webp');
+   const rateText=b==='4'?'Price after consultation':('Starts at '+moneyINR(starting));
+   card.innerHTML=`<img alt="${title}" loading="lazy" src="${img}"><div class="rental-card-info"><h3>${title}</h3><p class="rating-line">GM Painting Service · Rental package</p><p class="price-line"><strong>${rateText}</strong></p><label class="rental-quality-label" style="display:${b==='4'?'none':'block'};font-size:12px;font-weight:800;margin:8px 0 5px">Choose paint quality</label><select class="rental-quality" aria-label="Paint quality for ${title}" style="display:${b==='4'?'none':'block'};width:100%;padding:9px;border:1px solid #dfe3e9;border-radius:9px;background:#fff"><option>Tractor Emulsion</option><option>Apcolite Premium</option><option>Royale Luxury</option></select><p class="quality-price" style="font-size:14px;font-weight:800;margin:8px 0;color:#172033"></p><p class="included">${b==='4'?'4 BHK: No online painting price. Book a consultation to receive a quote after inspection.':'Choose a paint quality to see its exact package price. Final scope is confirmed during consultation.'}</p><button class="details-link" type="button">${b==='4'?'Book consultation':'View all prices and details'}</button></div><button class="add-service rental-add" type="button">${b==='4'?'Book consultation':'Choose package'}</button>`;
+   const q=card.querySelector('.rental-quality'), out=card.querySelector('.quality-price'), btn=card.querySelector('.rental-add'), details=card.querySelector('.details-link');
+   function consult(){openConsultation(title+(b==='4'?' — Consultation':' — '+q.value));}
+   function refresh(){const v=rentalRates[b][f][q.value];out.textContent=b==='4'?'Consultation required':moneyINR(v);btn.textContent=b==='4'?'Book consultation':'Choose package';}
+   q.addEventListener('change',refresh);refresh();
+   btn.addEventListener('click',()=>{if(b==='4'){consult();return;}const v=rentalRates[b][f][q.value];if(!v){consult();return;}gmCart.set('r-'+b+'-'+f,{id:'r-'+b+'-'+f,name:title+' — '+q.value,price:v});renderCart();showDamageStep();});
+   details.addEventListener('click',()=>{
+    if(b==='4'){consult();return;}
+    const qualities=['Tractor Emulsion','Apcolite Premium','Royale Luxury'];
+    const priceLines=qualities.map(name=>name+': '+moneyINR(rentalRates[b][f][name]));
+    showPackageDetails(title,'Selected: '+q.value+' — '+moneyINR(rentalRates[b][f][q.value]),'Paint quality prices ('+(f==='furnished'?'furnished':'unfurnished')+'):\n'+priceLines.join('\n')+'\n\nSelected quality: '+q.value+'. Choose the quality from the dropdown; the selected price appears on the card. Final scope and quote are confirmed after consultation.');
+   });
+   host.appendChild(card);
+  });
+ });
+}
+
+function openConsultation(service){
+ const m=document.getElementById('consultationModal');m.style.display='flex';document.getElementById('consultService').value=service||'Consultation';
+}
+function closeConsultation(){document.getElementById('consultationModal').style.display='none';}
+
+function moneyINR(n){return '₹'+Number(n||0).toLocaleString('en-IN');}
+function setHomeMode(mode,btn){
+  document.querySelectorAll('.catalog-switch button').forEach(b=>b.classList.toggle('active',b===btn));
+  const rental = document.getElementById('rentalOptions');
+  if (rental) rental.style.display = mode==='rental'?'block':'none';
+  const own = document.getElementById('ownPackageGrid');
+  if (own) own.style.display = mode==='own'?'grid':'none';
+}
+function setFurnish(type,btn){
+  document.querySelectorAll('.home-type button').forEach(b=>b.classList.toggle('active',b===btn));
+  const pg = document.getElementById('packageGrid');
+  if (pg) pg.querySelectorAll('[data-package]').forEach(card=>card.classList.toggle('catalog-hidden',card.dataset.package!==type));
+}
+function addTerraceEstimate(btn){
+  const card=btn.closest('.catalog-item');
+  const area=Number(card.querySelector('.terrace-area-input')?.value||0);
+  const rate=Number(card.querySelector('.terrace-rate-input')?.value||25);
+  if(!Number.isFinite(area)||area<1){alert('Please enter terrace area in square feet.');card.querySelector('.terrace-area-input')?.focus();return;}
+  const id=btn.dataset.id;
+  const amount=Math.round(area*rate);
+  gmCart.set(id,{id,name:'Terrace Waterproofing — '+area+' sq. ft. × ₹'+rate,price:amount,area,rate});
+  btn.classList.add('added');btn.textContent='✓ Estimate Added';
+  renderCart();
+}
+function toggleCartItem(btn){
+  const id=btn.dataset.id;
+  if(gmCart.has(id)){gmCart.delete(id);btn.classList.remove('added');btn.textContent='＋ Add';}
+  else {gmCart.set(id,{id,name:btn.dataset.name,price:Number(btn.dataset.price||0)});btn.classList.add('added');btn.textContent='✓ Added';}
+  renderCart();
+}
+function removeCartItem(id){
+  gmCart.delete(id);
+  const btn=document.querySelector('.add-service[data-id="'+CSS.escape(id)+'"]');
+  if(btn){btn.classList.remove('added');btn.textContent='＋ Add';}
+  renderCart();
+}
+function renderCart(){
+  const holder=document.getElementById('cartItems');
+  const items=[...gmCart.values()];
+  if(!items.length){holder.innerHTML='<p class="cart-empty">No services added yet. Tap “Add” beside any service to build your estimate.</p>';}
+  else {holder.innerHTML=items.map(x=>'<div class="cart-line"><div><strong>'+escapeHTML(x.name)+'</strong><small>'+(x.price?moneyINR(x.price):'Price after site inspection')+'</small></div><button type="button" class="cart-remove" onclick="removeCartItem(\''+x.id+'\')">Remove</button></div>').join('');}
+  const total=items.reduce((s,x)=>s+x.price,0);
+  document.getElementById('cartTotal').textContent=moneyINR(total)+(items.some(x=>!x.price)?'+':'');
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const consultationDate=document.getElementById('consultDay'); if(consultationDate){const now=new Date();consultationDate.min=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-');}
+buildRentalCards();
+setFurnish('unfurnished',document.querySelector('.home-type button[data-furnish="unfurnished"]'));
+
+</script>
+</div>
+<style>.dmg-btn{display:flex;flex-direction:column;gap:5px;align-items:flex-start;text-align:left;width:100%;background:#fff;border:2px solid #dfe3e9;border-radius:14px;padding:11px;font:inherit;cursor:pointer;color:#172033}.dmg-btn.on{border-color:#f97316;background:#fff7ed}.dmg-btn img{width:100%;height:96px;object-fit:cover;border-radius:9px}.dmg-btn small{font-size:11px;color:#667085}</style>
+<script>
+window.gmDamage='';
+function showDamageStep(){const d=document.getElementById('damageStep');d.style.display='block';d.scrollIntoView({behavior:'smooth',block:'center'})}
+function setDamage(t,btn){gmCart.delete('damage');document.querySelectorAll('.dmg-btn').forEach(b=>b.classList.toggle('on',b===btn));
+ if(t==='major'){gmCart.set('damage',{id:'damage',name:'Major damage / seepage treatment',price:1999});window.gmDamage='Major damage / seepage (+₹1,999)'}
+ else window.gmDamage=t==='minor'?'Minor damage repair (free)':'No damage';
+ renderCart();const x=document.getElementById('rentalExtras');x.style.display='block';setTimeout(()=>x.scrollIntoView({behavior:'smooth',block:'start'}),50)}
+function gmSummary(){const it=[...gmCart.values()],t=it.reduce((s,x)=>s+x.price,0);const l=it.map(x=>x.name+(x.price?' ('+moneyINR(x.price)+')':' (site estimate)'));if(window.gmDamage&&!gmCart.has('damage'))l.push('Damage: '+window.gmDamage);return l.join('; ')+(t?' | Estimated total: '+moneyINR(t):'')}
+function bookCartEstimate(){if(!gmCart.size){alert('Please add at least one service first.');return}openConsultation(gmSummary())}
+function sendConsultation(){const g=i=>document.getElementById(i).value.trim();const name=g('consultName'),phone=g('consultPhone'),area=g('consultArea'),flat=g('consultFlat'),service=g('consultService'),day=g('consultDay'),slot=g('consultSlot'),utr=g('consultUtr');
+ const dg=phone.replace(/\D/g,''),m=dg.length===10?dg:(dg.length===12&&dg.startsWith('91')?dg.slice(2):'');
+ if(!name||!m||!area||!flat||!day||!slot||!utr){alert('Please fill name, valid 10-digit mobile, area, flat number, date, time and UTR after paying ₹35.');return}
+ if(!/^[6-9]\d{9}$/.test(m)){alert('Please enter a valid 10-digit Indian mobile number.');return}
+ const t=new Date();t.setHours(0,0,0,0);if(new Date(day+'T00:00:00')<t){alert('Please choose today or a future date.');return}
+ const msg='Hi GM Painting Service — ₹35 Consultation Booking\nName: '+name+'\nMobile: '+phone+'\nArea: '+area+'\nFlat/House: '+flat+'\nServices: '+service+'\nPreferred date: '+day+'\nFree time slot: '+slot+'\nUPI ID: 9958416811@axl\nUTR: '+utr+'\nI have paid ₹35. Please verify the payment and confirm my booking.';
+ window.open('https://wa.me/919958416811?text='+encodeURIComponent(msg),'_blank')}
+</script>
+</body>
+</html>

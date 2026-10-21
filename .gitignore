@@ -1,0 +1,12 @@
+.git
+.git/**
+*.py
+check.py
+check_js.py
+audit.py
+deep_audit.py
+inspect_index.py
+check_dom.py
+check_nav.py
+audit_schema.py
+temp_script.js

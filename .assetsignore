@@ -1,0 +1,7 @@
+.git
+.git/**
+.gitignore
+wrangler.jsonc
+.assetsignore
+README.txt
+*.py
