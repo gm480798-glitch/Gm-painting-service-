@@ -1,6 +1,6 @@
 {
   "$schema": "https://developers.cloudflare.com/workers/wrangler/config-schema.json",
-  "name": "gmpaintingservice",
+  "name": "gm-painting-service",
   "compatibility_date": "2025-01-01",
   "assets": {
     "directory": "./",
