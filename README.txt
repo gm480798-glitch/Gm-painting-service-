@@ -5,3 +5,4 @@ GM Painting Service - upload guide
 3. After deploy: open /sitemap.xml and submit it in Google Search Console.
 4. Test once: rental flow, Rs.35 booking form, QR scan on phone, WhatsApp buttons.
 Updated 2026-10-31: shared design (gm-site.css) on every page, 34 locality pages rewritten with unique content, WhatsApp messages fixed, sitemap rebuilt, warranty terms clarified, Tractor Emulsion repainting-with-primer rate Rs.8 -> Rs.9 (home-owner and painting-cost pages only).
+Deployment trigger
