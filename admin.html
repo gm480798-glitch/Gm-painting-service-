@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GM Painting CRM</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{--bg:#f4f6f9;--cd:#fff;--tx:#0f1b2d;--mu:#64748b;--ln:#d5dde8;--or:#f97316;--fd:#eef6ff;--ok:#15803d;--bad:#b91c1c;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1220;--cd:#141d2e;--tx:#e6edf7;--mu:#93a4bb;--ln:#2a3850;--fd:#1b2a42;--ok:#4ade80;--bad:#f87171;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0b1220;--cd:#141d2e;--tx:#e6edf7;--mu:#93a4bb;--ln:#2a3850;--fd:#1b2a42;--ok:#4ade80;--bad:#f87171;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:90px}
+.w{max-width:560px;margin:0 auto;padding:12px}
+h1{font-size:19px;margin:6px 0}h2{font-size:15px;margin:14px 0 6px}
+.cd{background:var(--cd);border:1px solid var(--ln);border-radius:12px;padding:12px;margin:8px 0}
+input,textarea,select{width:100%;font:inherit;color:var(--tx);background:var(--fd);border:1px solid var(--ln);border-radius:8px;padding:11px;min-height:44px}
+textarea{min-height:64px;resize:vertical}label{display:block;font-size:12px;color:var(--mu);margin:8px 0 3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+button{font:inherit;border:0;border-radius:10px;padding:12px 14px;min-height:44px;background:var(--or);color:#fff;font-weight:600}
+button.s{background:var(--fd);color:var(--tx);border:1px solid var(--ln)}button.r{background:transparent;color:var(--bad);border:1px solid var(--bad)}
+.b{display:grid;gap:8px;margin-top:10px}.rw{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mu{color:var(--mu);font-size:13px}.pill{font-size:12px;padding:2px 9px;border-radius:99px;border:1px solid var(--ln);white-space:nowrap}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0}.chips button{padding:7px 12px;min-height:36px;white-space:nowrap}
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));border-radius:99px;padding:14px 20px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.bad{color:var(--bad)}.ok{color:var(--ok)}.tt{display:flex;justify-content:space-between;padding:4px 0}.big{font-size:18px;font-weight:700}
+.bn{background:var(--or);color:#fff;padding:8px 12px;border-radius:8px;margin:8px 0;font-size:13px}
+</style></head><body><div class="w" id="app"></div>
+<script>
+var LOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAkFBMVEX///////7+///9/v78/P3+zzT16sD0uyzL1s2ovsz5nif3kCnJlD33dDP1ajPMbD18mrBugoc3ltEvg7t9aUxUbX8yZ5J7UkRFTVUrTWooPVQZQ2kYOVwXOFsXN1oVO2EVN1wVN1sVN1oVN1kRPmcTN1saNVUUNlwUNlsUNloUNFYSNVoRMlUMMloKLVUGKE++xymsAAALoElEQVR42o2YCXuqPBOGORWPoFTgyBIgaKKVNcD//3ffM0lA23f7plfrUnM7mTUTp7Nyv9snT5L1efdTnu//1q/1H7m96dh/9PeVuC4xn/x75E9gv6kDoJQSj/J+t0gh8HxdIv8K/PYt5qv1UqwikrOyNpEAynYF0nfob3wD6j9YZbeq13d2sXQkXvfbG/e+w+oNIMX2NfqV2YEx+fq+3dr6hmM//NeFnViBdc15LdpxHJ9mP/JtU61dZW2mgXfjEyNkk6cmSr2urutxmud5aJqGX/FR8U211yrzbuuYB7khpfUcmUH2dQ1YyZIkSJKEsZJLfIHsSZ83Je7kG7vcua/uvW9WtFEku7qb5jIJDkHCymFWahgUdJ2me3394chnu5rB2d67a+doIAUOtnSdFQv2+4Ap6BisAjigdf2w329VfHfKJr11vdYZmyVcQrD9NyGNCVnX28otGr4D36Su55JwlnaA7Ncn9Cxg8zhO/K8L/wFYt3Ny2B+S5KAh3xU8HI9HQiblzOv/D1iPKsGSF+5wPJ0+SU6n40G/PB4OsOcs6v8GyrGemgCWCtYtnj7P3+QTNELC/2rkz78BrsGq02DkI3haswOtJBp0syzoSPwTtk3KBuVkdbxSPN+vzhYz9rGeynKAfmSt41HjPs9hnrNSC8vD8FMjw0AjV+JDyicK1fVty5paT4wthgfbH07AhTlrnl9VlWn5mhpmkGESwLKHgyb2WE617mXDrqf0gH7JkhgedqVxzTSJykiRXS6XrJrK/Ew2SOITlAzKsd7yjVIPiSm71qReOyCQjfk07wzc88rrsR8gCnLLLn/+ZFMZklGTNCCiEtctax1TP2wm13OSLwfLO0E9Nj0552rmfS1ESz+9UhUhnzn5KMyImMz1WlkkAbfqBgMGZsOw3wmeaGY5zvNyi4K5NiXtCaZGXr6YJl6IyKb6FTaUwEIHzLUdAlbuKXKPQZKX060ublWRRt5+T5bXFQlKACkyKFmGlngMmufVlILOsdbUtXRKgiU4HJFy5bLcJs9P3dR3f//GGwMMLa+25/SiV5qIiDrHREyQ1vAqar1DnzDAx1ieWIlYTpaliLw03UWpm1GII22TqRYGp5umrFUBot41EU/kaQoTxGGvm7zxyAkWDMsFajl+4XkEhEmRYvtgRrHmaC7C9gtBxEtO+X1JSUVrRUeSr6miXqFgoqBe4TuO6/meBqamfgUwez2TjMIW93ZGqH/lkCLDDni/Ak0/IgvmRxTTJXWBM2K3jD3n2JIq0jQtuBLa3qJhWkr84O8W3LqNCjKPVEEwlEv8S/P8yDfAHAULGZZPc+w6EI/T0vqxJL/f5bASbRulis+O4bTEtF0vKlSjIgC9DPFL0VE+F98B0XWihd+hbRF8A+5Zq/oNKDUwP9J+d+ClSx5+5k8dNjmyGRVm5Iv/4X44O9ct5povaZSYWmlkf2B+pOoNqIMwPLLRc3bECz+BmdO48IucKhXKDTca4tdfBFycJdQJNjmVmVeBqMsXWfA6NqdwiaCBF4EXsmGCV8d5vLLw/JlP9QrEn3Thsp+T43cg9wpS0ZFbGh8Zd3e/PH/ELstJ1nd0IC6f05SHAyrOCtw53rWT9Vjm78JG7EYDt7qQB/AIFIzLz7B5JTvp3ozX+wY0funrcc5SU3PxME1LYTVEptjClSzeDsAq/3wVDxyYWtlS5r+A+BCW8jldw9VzfbWknq+0l+2pBkBWUVj4KszXBk5JJO0x7AXUfuE99+BxEseNmtT34raSFthSsk9JmTruLzcqz2zCsU2ipvCXCAvc7RznY+emCg50tbqOz0vfi9RUZALnHacnNTSwiQgYl2HT6nwU0/KS2QJdBAIevaVwdxDXh0GRAbcJvSa7DdopsseW6pEpAu5ihsKhearwX5Kq2Wy58PCA0In0QxS7yvdvDcojgNUg5OblkZEKOycq8+lKQI5NvcQzwA+ngGofUM0oCO24x2OvsUAptjY6lhbYsElaoPsSb1wMMH13TozPlEC6AxXwrFLSlC957/mVNHIpaln/HWiCWW1Asp6z+yBLwjU+92+R2xDwAg3vZpJCcS054tr9oBjj3c8tAzisQKpIrg3HWVQNzicqLg1QGaCgal22c6odiDTQwHoqfI9+gHEt8APAmSuUEJswSLBTeM6nHxpKOZZsHEvXIUMXkyEibFDylwbvum8azpQj2i98lI8nw5mEpSXOE2/AVgNLqnj4bn/mdxOIXAg+Vga42XAW2trkEd5JPqE0DX5Jrf9ye6B8mXGuHfIHa9JtK8JkJKAauPsGFCN3Kf0oXNsGwMYvvgg40JzS6Qogpxy9Zibj7Oi7BTejgKwl/wmsO+2/YoZl7s8m+DyXUTECmKm6F44dqSaWD+gA5L8PBKNapMnhGlFigPOmIWVRqh872AonRRYXzwuMqKAz4rA3XknmMDFBC6KXDiaHh1Rr/Q4kl4llNoenieEwz9Ki+nP5g6jRQD2tUrVhp1J4tnE4XhSnaex7Jid27zak0a2ubWwxnPryguLwIjADivWKAAGVNKdAVSB+mCplYxrPYNZotsXBAseHjoM74pBajo5DJVC6HDuvY89BkxzDBUTKQMdWT4ODUfmbUwjYYzEWPdCAzuHU4wxaqNYABZhPST2AHY+hmiIqe5q0o1pKr+IFnvX1FxDw3rddN46dGJImD9HE54p2/HjdiqCRXqcyKEMQS5yWTHvTVKqpHH2TNCRB/prQ7UaOVtrkZ/wsesd07pJO121dJYSKp9M5V3Q8dH9pmOfH1TLCsWLW9TZSZHppzI7DZD4n57CkKPwa2t5MAb0Zt+k4x0Ka6cIcMVPSWQuHrQU4sXYEpDbUM1cmdatw0AwKDOSqIgVrrbdzt7c2qFdzEkBFzE6fIYolSgMAoz5iChLOb4j09cJIijnAqBBk6PJKKyjNFEA9qhX3hzmz5zhg0PSU4CO3gdOMLTvRAq2Uvh+wQ7fE/BvscdBL4/OZaQX1BRI1qe3uC35hAcMJXI80IFZKH6vFjKNmHEHitFD6iHXnkyLeIUkxG8347Li6wllvrWgrV9o0PqaJcFylHjWdBaMoLei0WmRxROeNK0dIEC9IEYSN/uTTnr2pSXXayrJ7dtcppmDEzPgJItL9ph589tJSj6BwV5n6mLmnmR3A2xPvzL6oLLS9vXZx7q+LNUCHrxhmPGGqxWo9Kd7UlGKviZE4SqcBSUWT9P6UhGbD4HXrhdx3YF8PVcxyEPWsByUvVZpGafA7iiGROW6xveGFdHJETMOAz4e+rUI+Uj3EloWJDRpoqmzJ9ZUC1AzTrMLAEiU5jcbHPP2DlI3MuIrmZHnPXpgqreNQX/sJeiH1vZtUWTaTr83MHLJoxpExTk6M5amHlFUxo//oi4N8qSi8zA3DwwDtnQPdJ4nWnGkyGof1jQIkjwqkn5eEkR95PoDVJcFwSRcH4BXQb2jv2/xtgcaA5mJQEy/VQpvEvuFJGtQAjGl6ATDFLHTStxq030z1zzfcD+BGrC7Z1CQnfUvBotR3PJZHGngpohI4unIo5ww1sGu/8Trd9eztqDQBDpOqZ0bXANAS9awgYkQKen5WRAVCUk8dX5fLl1onP3sp2lO1aXWf6uy3aG7b09CefSm6lWtAjH0cSvwIIVQ1dH2B6TxD2xyEDb/HFnkOXeCuw8/r8rYVasyo1X4NJfepkKWx/i0uyBrgMIkKZbxob/NeNjRK03Xv+22w6LBvdIpLJmiKNJIhbRvWEO6memFG441p45AGcJzQAWy/3S63oldjBebN8z4cH8UGBZtax3SrKgFc2+nzuU1aaX3g/LiftrD1Qaln9cAgYkcSAP+0NR+B6/5BnG+vxp//ptI7R+isGzAjx7Zd9+9A/QGojNYov+lJzbeb0bN8zYsyBN5bDrxvr30DSnPTJy32TbSVBDrArYDcJkX6ya77Lw0NsFuBohMrTxNrLkaFrjJSMiHz/w34P0yhnezS4hMTAAAAAElFTkSuQmCC",QR="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL4AAAC+AQAAAACjD4gwAAAFT0lEQVR42u1YMY/cRBT+xnYyFsrZm1QpzNoSFCBRJKJxpAM7VdIh8QsC9Gi3uxQ5zyXFpbpciYRQ4F9A5xVI3i5CNBFS0Jg9iS4Zh5PwIu88Cu/6vF5f7pIGCtysdsfz5n3vfe97b5YRep+FgVOe/xf+rQXGjHkeGyiCwto7mgdTxozlDgMDiH5TatMWkU+zlGV7JPxHkssQ3KWCqrO96jljwRDq+VaMXPl3A1Qg1ovDqLefcQannZdTlIcWz7Mg7ISkYhZgG5uxsgCg7LqrJYDqL20DIl4h9zAjoMg0gMTPiByMW8hFdRpyq/5M0eAwCROWfbMDX1XziTDA6E1Tm7OAb41nDw8X4g93+7qcFmzQ7BgA1WmptTYWiKr55YcOYApv/BP/OCTS5/GqixxEVCIchT4pYDtBOOQP6HETK1EzSwIAdqFeB3m5+o0IoY4UL9Jxlfj7lOZlw8RYn2ZqZY/WF3z7wg+sgDk8ur8owOkWJgfLl3Urgx1TqolueoJccp/AD7DrCy/x4Gdu6p6nPnpKzRQypBJwfOWXXijREC4+y1TQMQX4GfglH3Dlrkm45qDt1f1AAGAA7HOKjNh0l0SeFalj7knXJD9jJSJqIz81iJumJIgYYXtMSsJPGSFk7VJ7jfp4RzBbTt0UODT3n8XDOabLHTEw6AWYnlbOySUAir8dcw9HkBymszz8Sv2StFdYRUMftZGP2l37CgDIuA2KiMoZUbkbHZgELkPNnXCVqCWpF8FppM5hr8nrvjcHN/ClrxIVAPOXGK3F6lg63/YgB/4EG7VIRgTIaMjV9i2iFFSyTCJp8qGA6ilwbaU4bfWxArScqllSRSoq0mhG5WiWyuhgBTCut8Ualt1keemVAiDctUQTYQRUXIdUJhozkkC49Mquux6slPWzxJCtLxaA7wEAv5LB2uwiqkAZkTY1GH01yyTXeFU5tzjO9js5D8Ij+DeMa4gBBPPgJFax7ikDA0BqrFO02TH1gCcOAOAFwFIZqVf32pNO2BUZBV6kzoeUctqfZUvURiMFFxE0BjtN+KpYP0MLywbTEhwIfgNgQ9blHOpIRQJE+3oHIZUNqWMNQFwUDbvXSC0A3MYaE70dk1wqKCIqE7/MU7ccr+XjTrudt91VwPE6E2kYOVxvf0H0qKQ0J+Ck1AZAtQU67O+c8d+dIKZmCb6XacCnWSqRl0tTjZa4nQzWgC2YqqOiyiWiPCuqxHMpI2IrU/YAwKDqHVj65bV+raKqy8TDyQ1juvWRsGGKI/w+wfTzNx0/yOM0NuBKTO56YYBFMuzI0oapZaplh4lVMsuoZKVjEgm/lFGn1Kzzd07sVBiGwLhyJbDDsr2UtfUKTdsW63q1Wc43P+EPvr4A/TLFZ/py/H711nt3ABDN9s1sGO2R8lyT+pi4Kfq3gd015JZYztRVpMJRpJAQmSUjp+mcBlR/OeueuR1EM0KoQwfjmTIFZeAFPXrD8UNyyjTXoVslcgRQ2jCxlQ+7x1S1EcQgOsZ35f1sYLF7YMkxKF5J33OMIJCAACN+vtaKaoCs4258BQKAAKEEkMKqzyAAn06JOf7P/J4XMa5virM1sRNdsbwuWfMAo0gshMefxX46mLzueD44uS5lCFkFX5kCoEyHSTuI1flLbcEA+eTFLZUP5sos8xsGDje4a599iavr6Pq7V92Hj6kwnUtPB0huf9DsMILaKzZQgIDeEJnenAuwDVniv+wNFsiHmMsw4IPrB6/wqo1DbgaRdMTSkUkeR6g7TfiMcdBeH4RNKjJlFj+KGXlhTrSuDFbPqKZ7EsX+//fjP7XwD+xytS8WMctYAAAAAElFTkSuQmCC";
+var STAT=["New","Quoted","Confirmed","In Progress","Completed","Lost"];
+var PRESETS=[
+{k:"te_re",n:"Tractor Emulsion – Repaint (2 coat)",r:8,u:"sq ft"},
+{k:"te_rp",n:"Tractor Emulsion – Repaint with Primer (1 primer + 2 coat)",r:9,u:"sq ft"},
+{k:"te_fr",n:"Tractor Emulsion – Fresh Paint (putty + primer + 2 coat)",r:16,u:"sq ft"},
+{k:"pr",n:"Asian Paints Primer – 1 coat",r:2,u:"sq ft"},
+{k:"apx",n:"Asian Paints Apex Ultima – 2 coat (Exterior)",r:16,u:"sq ft"},
+{k:"apc",n:"Asian Paints Apcolite Premium Emulsion – 2 coat",r:8,u:"sq ft"},
+{k:"enm",n:"Enamel Paint – 2 coat (windows / grills / railings)",r:"",u:"lump sum"},
+{k:"tg",n:"Tile Grouting",r:"",u:"sq ft"},
+{k:"wp",n:"Wood Polishing",r:"",u:"sq ft"},
+{k:"rc",n:"Roof Cool Coating",r:"",u:"sq ft"},
+{k:"tx",n:"Texture Painting",r:"",u:"sq ft"},
+{k:"cus",n:"Other / Custom work",r:"",u:""}];
+function pre(k){return PRESETS.find(function(p){return p.k===k})}
+var jobs=[],cur=null,col=null,flt="All",q="",note="";
+function $(s){return document.querySelector(s)}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function n(v){v=parseFloat(String(v==null?"":v).replace(/,/g,""));return isNaN(v)?0:v}
+function m(v){return "₹"+(Math.round(v*100)/100).toLocaleString("en-IN")}
+function today(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function dmy(s){return s?s.split("-").reverse().join("-"):""}
+function calc(j){var s=0;j.items.forEach(function(i){i.amt=Math.round(n(i.qty)*n(i.rate)*100)/100;s+=i.amt});
+ var b=Math.max(s-n(j.disc),0),g=Math.round(b*n(j.gst))/100,t=Math.round((b+g)*100)/100,p=(j.pays||[]).reduce(function(a,x){return a+n(x.amt)},0);
+ return{s:s,g:g,t:t,paid:p,bal:Math.round((t-p)*100)/100}}
+function words(x){var a="One Two Three Four Five Six Seven Eight Nine Ten Eleven Twelve Thirteen Fourteen Fifteen Sixteen Seventeen Eighteen Nineteen".split(" "),b="  Twenty Thirty Forty Fifty Sixty Seventy Eighty Ninety".split(" ");
+ function t2(k){return k<20?a[k-1]:b[Math.floor(k/10)]+(k%10?" "+a[k%10-1]:"")}
+ function t3(k){var s="";if(k>99){s=a[Math.floor(k/100)-1]+" Hundred";k%=100;if(k)s+=" "}if(k)s+=t2(k);return s}
+ var r=Math.round(x),p=[],c=Math.floor(r/1e7),l=Math.floor(r%1e7/1e5),h=Math.floor(r%1e5/1e3),u=r%1e3;
+ if(c)p.push(t3(c)+" Crore");if(l)p.push(t2(l)+" Lakh");if(h)p.push(t2(h)+" Thousand");if(u)p.push(t3(u));
+ return "Rupees "+(p.join(" ")||"Zero")+" Only"}
+function nextNo(){return jobs.reduce(function(a,j){return Math.max(a,j.no||0)},0)+1}
+function newJob(){return{id:"j"+Date.now(),no:nextNo(),date:today(),st:"New",name:"",phone:"",area:"",items:[{work:"",desc:"",qty:"",rate:""}],disc:"",gst:"",adv:"",valid:"",notes:"",fu:"",fnote:"",pays:[]}}
+function persist(){try{localStorage.setItem("gmcrm_jobs",JSON.stringify(jobs));return true}catch(e){alert("Could not save on this browser.");return false}}
+function init(){try{var r=localStorage.getItem("gmcrm_jobs");jobs=r?JSON.parse(r):[];jobs.forEach(function(o){if(!o.items)o.items=[];if(!o.pays)o.pays=[]})}catch(e){jobs=[];note="Browser storage is not available."}
+ note=note||"Data is saved on this phone/browser only. Use Backup now and then.";render()}
+function render(){cur?edit():list()}
+function list(){
+ var t=today(),open=function(j){return j.st!=="Completed"&&j.st!=="Lost"};
+ var fu=jobs.filter(function(j){return j.fu&&j.fu<=t&&open(j)}).sort(function(a,b){return a.fu<b.fu?-1:1});
+ var pend=jobs.filter(function(j){return j.st!=="Lost"&&j.st!=="New"&&j.st!=="Quoted"}).reduce(function(a,j){return a+Math.max(calc(j).bal,0)},0);
+ var L=jobs.filter(function(j){return(flt==="All"||j.st===flt)&&(!q||(j.name+" "+j.phone+" "+j.area).toLowerCase().indexOf(q.toLowerCase())>-1)}).sort(function(a,b){return(b.upd||0)-(a.upd||0)});
+ var card=function(j){var c=calc(j);return '<div class="cd" data-o="'+j.id+'"><div class="rw"><b>'+esc(j.name||"(no name)")+'</b><span class="pill">'+esc(j.st)+'</span></div><div class="mu">'+esc(j.phone)+(j.area?" · "+esc(j.area):"")+'</div><div class="rw"><span class="mu">#'+j.no+" · "+esc(dmy(j.date))+'</span><span>'+m(c.t)+(c.t>0&&c.bal>0&&c.paid>0?' <span class="bad">(due '+m(c.bal)+')</span>':"")+'</span></div>'+(j.fu?'<div class="mu '+(j.fu<=t&&open(j)?"bad":"")+'">Follow-up: '+esc(dmy(j.fu))+(j.fnote?" – "+esc(j.fnote):"")+'</div>':"")+'</div>'};
+ $("#app").innerHTML='<h1>GM Painting CRM</h1>'+(note?'<div class="bn">'+esc(note)+'</div>':"")+
+ '<div class="g2"><div class="cd"><div class="mu">Customers</div><div class="big">'+jobs.length+'</div></div><div class="cd"><div class="mu">Payment pending</div><div class="big">'+m(pend)+'</div></div></div>'+
+ (fu.length?'<h2>Follow-ups due ('+fu.length+')</h2>'+fu.map(card).join(""):"")+
+ '<input id="q" placeholder="Search name, mobile, area" value="'+esc(q)+'"><div class="chips">'+["All"].concat(STAT).map(function(s){return '<button class="'+(s===flt?"":"s")+'" data-c="'+s+'">'+s+'</button>'}).join("")+'</div>'+
+ (L.length?L.map(card).join(""):'<p class="mu">No customers yet. Tap + New to add one.</p>')+'<div class="g2" style="margin-top:14px"><button class="s" id="bkp">Backup</button><button class="s" id="rst">Restore</button></div><input type="file" id="rf" accept=".json" hidden><button class="fab" id="nw">+ New</button>';
+ $("#q").oninput=function(e){q=e.target.value;var p=e.target.selectionStart;list();var x=$("#q");x.focus();x.setSelectionRange(p,p)};
+ document.querySelectorAll("[data-c]").forEach(function(b){b.onclick=function(){flt=b.dataset.c;list()}});
+ document.querySelectorAll("[data-o]").forEach(function(b){b.onclick=function(){cur=JSON.parse(JSON.stringify(jobs.find(function(j){return j.id===b.dataset.o})));edit()}});
+ $("#nw").onclick=function(){cur=newJob();edit()};
+ $("#bkp").onclick=function(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(jobs)],{type:"application/json"}));a.download="gm-crm-backup-"+today()+".json";document.body.appendChild(a);a.click();a.remove()};
+ $("#rst").onclick=function(){$("#rf").click()};$("#rf").onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var a=JSON.parse(r.result);if(Array.isArray(a)&&confirm("Replace current customers with this backup?")){jobs=a;persist();list()}}catch(x){alert("Not a valid backup file")}};r.readAsText(f)}}
+function get(p){return p.split(".").reduce(function(o,k){return o==null?o:o[k]},cur)}
+function set(p,v){var k=p.split("."),o=cur;for(var i=0;i<k.length-1;i++)o=o[k[i]];o[k[k.length-1]]=v}
+function fld(l,p,x){return '<label>'+l+'</label><input data-f="'+p+'" '+(x||"")+'>'}
+function edit(){
+ var j=cur;if(!j.mid)j.mid="auto";var ph=String(j.phone).replace(/\D/g,"");if(ph.length===10)ph="91"+ph;
+ $("#app").innerHTML='<div class="rw"><button class="s" id="bk">← Back</button><span class="mu">Quotation #'+esc(j.no)+'</span></div>'+
+ '<div class="cd"><b>GM Painting Service</b><div class="mu">Banashankari 3rd Stage, Bengaluru, Karnataka<br>GSTIN: 10GXVPM2449K1ZY · gm480798@gmail.com</div></div>'+
+ '<div class="cd"><h2>Customer</h2>'+fld("Customer name","name")+fld("Mobile","phone",'inputmode="tel"')+fld("Area / Address","area")+
+ '<div>'+fld("Date","date",'type="date"')+'</div>'+
+ '<label>Work status</label><select data-f="st">'+STAT.map(function(s){return '<option>'+s+'</option>'}).join("")+'</select></div>'+
+ '<h2>Work items</h2>'+j.items.map(function(it,k){return '<div class="cd"><div class="rw"><b>Item '+(k+1)+'</b>'+(j.items.length>1?'<button class="r" data-di="'+k+'">Remove</button>':"")+'</div><label>Type of work (rate fills automatically)</label><select data-w="'+k+'"><option value="">Select work…</option>'+PRESETS.filter(function(p){return p.on!==false||p.k===it.work}).map(function(p){return '<option value="'+p.k+'"'+(p.k===it.work?' selected':'')+'>'+esc(p.n)+(p.r?' – ₹'+p.r:'')+'</option>'}).join("")+'</select><label>Area / location (e.g. Exterior walls: front &amp; back)</label><textarea data-f="items.'+k+'.desc"></textarea><div class="g3"><div>'+fld((it.work&&pre(it.work)&&pre(it.work).u==="sq ft"?"Area (sq ft)":"Qty / Area"),"items."+k+".qty",'inputmode="decimal"')+'</div><div>'+fld("Rate (₹)","items."+k+".rate",'inputmode="decimal"')+'</div><div><label>Amount</label><div class="big" id="a'+k+'"></div></div></div></div>'}).join("")+
+ '<button class="s" id="ai" style="width:100%">+ Add item</button>'+
+ '<div class="cd"><div class="g2"><div>'+fld("Discount (₹)","disc",'inputmode="decimal"')+'</div><div>'+fld("GST %","gst",'inputmode="decimal"')+'</div></div>'+
+ '<div class="tt"><span>Sub total</span><span id="t1"></span></div><div class="tt"><span>GST</span><span id="t2"></span></div><div class="tt big"><span>TOTAL</span><span id="t3"></span></div><div class="mu" id="tw"></div>'+
+ '<label>Scope / special notes (printed on quotation)</label><textarea data-f="notes"></textarea></div>'+
+ '<h2>Payment</h2><div class="cd">'+fld("Booking amount (₹) – to confirm slot","book",'inputmode="decimal" placeholder="1000"')+'<div class="g2"><div>'+fld("On work start day (%)","startp",'inputmode="decimal" placeholder="35"')+'</div><div>'+fld("Middle payment (%)","midp",'inputmode="decimal" placeholder="30"')+'</div></div><label>Middle payment (big projects, ₹50,000 and above)</label><select data-f="mid"><option value="auto">Auto – only if total is ₹50,000 or more</option><option value="yes">Yes, take middle payment</option><option value="no">No</option></select><div id="sch" class="mu" style="margin:8px 0"></div>'+
+ '<h2>Payments received</h2>'+j.pays.map(function(p,k){return '<div class="g3" style="margin-bottom:6px"><input data-f="pays.'+k+'.amt" inputmode="decimal" placeholder="₹ amount"><input type="date" data-f="pays.'+k+'.date"><button class="r" data-dp="'+k+'">✕</button></div>'}).join("")+
+ '<button class="s" id="ap" style="width:100%">+ Add payment received</button><div class="tt"><span>Received</span><span id="p1"></span></div><div class="tt big"><span>Balance due</span><span id="p2"></span></div></div>'+
+ '<h2>Follow-up</h2><div class="cd"><div class="g2"><div>'+fld("Follow-up date","fu",'type="date"')+'</div><div>'+fld("Note","fnote")+'</div></div></div>'+
+ '<div class="b"><button class="s" id="sv">Save customer</button><button id="sh">Share quotation PDF</button><button class="s" id="pd">Download quotation PDF</button>'+
+ (ph?'<div class="g2"><a href="https://wa.me/'+ph+'" target="_blank" rel="noopener"><button class="s" style="width:100%">WhatsApp</button></a><a href="tel:'+esc(j.phone)+'"><button class="s" style="width:100%">Call</button></a></div>':"")+
+ (jobs.some(function(x){return x.id===j.id})?'<button class="r" id="dl">Delete customer</button>':"")+'</div>';
+ document.querySelectorAll("[data-f]").forEach(function(e){var v=get(e.dataset.f);e.value=v==null?"":v;e.oninput=function(){set(e.dataset.f,e.value);upd()}});
+ $("#bk").onclick=function(){commit();cur=null;render()};
+ document.querySelectorAll("[data-w]").forEach(function(e){e.onchange=function(){var it=cur.items[+e.dataset.w],p=pre(e.value);var po=pre(it.work);it.work=e.value;if(p&&p.r!=="")it.rate=p.r;else if(p&&po&&po.r!==""&&String(it.rate)===String(po.r))it.rate="";if(p&&p.u==="lump sum"&&!it.qty)it.qty=1;edit()}});
+ $("#ai").onclick=function(){cur.items.push({work:"",desc:"",qty:"",rate:""});edit()};
+ $("#ap").onclick=function(){cur.pays.push({amt:"",date:today()});edit()};
+ document.querySelectorAll("[data-di]").forEach(function(b){b.onclick=function(){cur.items.splice(+b.dataset.di,1);edit()}});
+ document.querySelectorAll("[data-dp]").forEach(function(b){b.onclick=function(){cur.pays.splice(+b.dataset.dp,1);edit()}});
+ $("#sv").onclick=save;$("#sh").onclick=function(){pdf(cur,true)};$("#pd").onclick=function(){pdf(cur)};
+ if($("#dl"))$("#dl").onclick=function(){if(confirm("Delete this customer permanently?")){jobs=jobs.filter(function(x){return x.id!==cur.id});persist();cur=null;render()}};
+ upd()}
+function upd(){var c=calc(cur);var se=$("#sch");if(se)se.innerHTML=c.t>0?sched(cur,c.t).map(function(r){return "<div class=\"tt\"><span>"+esc(r[0])+"</span><b>"+m(r[1])+"</b></div>"}).join(""):"";cur.items.forEach(function(i,k){var e=$("#a"+k);if(e)e.textContent=m(i.amt)});
+ $("#t1").textContent=m(c.s);$("#t2").textContent=m(c.g);$("#t3").textContent=m(c.t);$("#tw").textContent=c.t>0?words(c.t):"";$("#p1").textContent=m(c.paid);var b=$("#p2");b.textContent=m(c.bal);b.className=c.bal>0&&c.t>0?"bad":"ok"}
+function save(){cur.upd=Date.now();var i=jobs.findIndex(function(x){return x.id===cur.id});if(i>-1)jobs[i]=JSON.parse(JSON.stringify(cur));else jobs.push(JSON.parse(JSON.stringify(cur)));if(persist()){cur=null;render()}}
+function sched(j,t){var g=function(v,d){return v==null||v===""?d:n(v)},bk=g(j.book,1000),sp=g(j.startp,35),mp=g(j.midp,30),big=j.mid==="yes"||((!j.mid||j.mid==="auto")&&t>=50000),
+ st=Math.round(t*sp/100),md=big?Math.round(t*mp/100):0,bal=Math.max(t-bk-st-md,0),R=[["Booking (to confirm slot)",bk],["On work start day ("+sp+"%)",st]];
+ if(big)R.push(["Middle payment ("+mp+"%, when about half the work is done)",md]);R.push(["Balance on completion of work",bal]);return R}
+async function pdf(j,share){
+ var J=window.jspdf&&window.jspdf.jsPDF;if(!J){alert("PDF tool did not load. Check internet and try again.");return}
+ var d=new J({unit:"mm",format:"a4"}),c=calc(j),W=210,M=14,y;
+ var OR=[249,115,22],NV=[15,27,45],GR=[100,116,139],LF=[255,244,236],BL=[233,238,247],LN=[190,200,212];
+ function T(s,x,yy,sz,b,col,al){d.setFont("helvetica",b?"bold":"normal");d.setFontSize(sz);d.setTextColor.apply(d,col||NV);d.text(String(s),x,yy,{align:al||"left"})}
+ function P(txt,x,yy,w,sz,b,col){d.setFont("helvetica",b?"bold":"normal");d.setFontSize(sz);d.setTextColor.apply(d,col||NV);var L=d.splitTextToSize(String(txt),w);d.text(L,x,yy);return L.length*sz*.42}
+ function box(x,yy,w,h,f){d.setFillColor.apply(d,f);d.rect(x,yy,w,h,"F")}
+ function head(tag){d.addImage(LOGO,"PNG",M,10,22,22);T("GM Painting Service",M+27,19,20,1);T("Professional Home Painting & Finishing, Bengaluru",M+27,25,9,0,GR);T("Phone: +91 99584 16811   |   gmpaintingservice.in",M+27,31,9.5);
+  box(W-M-46,11,46,12,OR);T(tag,W-M-23,19,13,1,[255,255,255],"center");d.setDrawColor.apply(d,OR);d.setLineWidth(.8);d.line(M,38,W-M,38)}
+ var X=[M,M+12,M+110,M+136,M+158,W-M];
+ function th(yy){box(M,yy,W-2*M,9,NV);var w=[255,255,255];T("S.No",X[0]+2,yy+6,9,1,w);T("Description of Work",X[1]+2,yy+6,9,1,w);T("Area / Qty",X[3]-2,yy+6,9,1,w,"right");T("Rate",X[4]-2,yy+6,9,1,w,"right");T("Amount (Rs.)",X[5]-2,yy+6,9,1,w,"right")}
+ function row(yy,h){d.setDrawColor.apply(d,LN);d.setLineWidth(.2);d.rect(M,yy,W-2*M,h);for(var i=1;i<5;i++)d.line(X[i],yy,X[i],yy+h)}
+ head("QUOTATION");
+ T("GSTIN",M,46,8,0,GR);T("Email",M+60,46,8,0,GR);T("Address",M+128,46,8,0,GR);
+ box(M,48,56,9,BL);T("10GXVPM2449K1ZY",M+2,54,9.5,1);box(M+60,48,64,9,BL);T("gm480798@gmail.com",M+62,54,9.5,1);
+ box(M+128,48,54,9,LF);P("Banashankari 3rd Stage, Bengaluru, Karnataka",M+130,52,50,7);
+ T("Quotation No.",M,63,8,0,GR);T("Date",M+60,63,8,0,GR);
+ box(M,65,56,9,LF);T("GM-"+String(j.no).padStart(4,"0"),M+2,71,10,1);box(M+60,65,64,9,LF);T(dmy(j.date),M+62,71,10,1);
+ var al=d.splitTextToSize(j.area||"",W-2*M-12).length;
+ d.setFillColor(244,246,249);d.setDrawColor.apply(d,LN);d.setLineWidth(.3);var bh=j.area?30+al*4.4:22;d.roundRect(M,80,W-2*M,bh,2.5,2.5,"FD");
+ T("QUOTATION FOR",M+5,87,10,1);T("Customer Name",M+5,92,8,0,GR);T("Mobile",M+120,92,8,0,GR);T(j.name||"",M+5,98,11,1);T(j.phone||"",M+120,98,11,1);
+ if(j.area){T("Area / Address",M+5,104,8,0,GR);P(j.area,M+5,109,W-2*M-12,9.5)}
+ y=80+bh+6;th(y);y+=9;
+ var cnt=0;
+ j.items.forEach(function(it,k){var pw=pre(it.work),hd=pw?pw.n:"",wd=X[2]-X[1]-4,HL=hd?d.splitTextToSize(hd,wd):[],L=d.splitTextToSize(it.desc?(hd?"("+it.desc+")":it.desc):"",wd),h=Math.max((HL.length+L.length)*4.4+5,10);
+  if(y+h>255){d.addPage();head("QUOTATION");y=46;th(y);y+=9}
+  row(y,h);T(k+1,X[0]+4,y+6.2,10,1);
+  if(HL.length){d.setFont("helvetica","bold");d.setFontSize(9.5);d.setTextColor.apply(d,NV);d.text(HL,X[1]+2,y+5.6)}
+  d.setFont("helvetica","normal");d.setFontSize(9);d.setTextColor.apply(d,NV);d.text(L,X[1]+2,y+5.6+HL.length*4.4);
+  var u=pw&&pw.u==="sq ft"?" sq ft":"";
+  T((it.qty||"")+(it.qty?u:""),X[3]-2,y+6.2,9.5,0,NV,"right");T(it.rate?n(it.rate).toLocaleString("en-IN"):"",X[4]-2,y+6.2,9.5,0,NV,"right");T(it.amt?it.amt.toLocaleString("en-IN"):"",X[5]-2,y+6.2,9.5,1,NV,"right");y+=h;cnt++});
+ while(cnt<8&&y<175){row(y,10);T(cnt+1,X[0]+4,y+6.2,10,1);y+=10;cnt++}
+ if(y>205){d.addPage();head("QUOTATION");y=46}
+ y+=8;var ty=y;
+ var R=function(l,v){box(W-M-62,y-5,62,8,LF);T(l,W-M-60,y,10);T(v,W-M-2,y,10,0,NV,"right");y+=9};
+ R("Sub Total",c.s.toLocaleString("en-IN"));R("Discount (Rs.)",n(j.disc)?n(j.disc).toLocaleString("en-IN"):"-");R("GST %",n(j.gst)?String(n(j.gst)):"-");R("GST Amount",n(j.gst)?c.g.toLocaleString("en-IN"):"-");
+ box(W-M-62,y-6,62,11,OR);T("TOTAL (Rs.)",W-M-60,y+1,12,1,[255,255,255]);T(c.t.toLocaleString("en-IN"),W-M-2,y+1,12,1,[255,255,255],"right");
+ T("Pay To",M,ty,11,1);d.setDrawColor.apply(d,LN);d.roundRect(M,ty+3,34,34,2,2,"S");d.addImage(QR,"PNG",M+2,ty+5,30,30);
+ T("Scan with any UPI app",M+40,ty+8,8,0,GR);T("UPI ID: 9958416811@ybl",M+40,ty+14,9.5,1);T("Name: GM Painting Service",M+40,ty+20,9.5);T("Phone / WhatsApp:",M+40,ty+26,9.5);T("+91 99584 16811",M+40,ty+31,9.5,1);
+ y=Math.max(y+10,ty+42);box(M,y-5,W-2*M,10,LF);T("Amount in words",M+2,y+1,9.5,1);d.setFont("helvetica","normal");d.setFontSize(9.5);d.setTextColor.apply(d,NV);d.text(d.splitTextToSize(c.t>0?words(c.t):"",W-2*M-42)[0]||"",M+40,y+1);
+ d.addPage();head("TERMS");y=48;
+ T("Scope / Special Notes",M,y,11,1);y+=4;var nl=d.splitTextToSize(j.notes||"",W-2*M-6),nh=Math.max(nl.length*4.4+8,32);box(M,y,W-2*M,nh,LF);if(j.notes){d.setFont("helvetica","normal");d.setFontSize(9.5);d.setTextColor.apply(d,NV);d.text(nl,M+3,y+7)}y+=nh+9;
+ T("Payment Terms",M,y,11,1);y+=4;
+ var S=sched(j,c.t);S.forEach(function(r,i){box(M,y,W-2*M,9,i%2?[255,255,255]:LF);d.setDrawColor.apply(d,LN);d.setLineWidth(.2);d.rect(M,y,W-2*M,9);T((i+1)+".  "+r[0],M+3,y+6,9.5);T(c.t>0?"Rs. "+r[1].toLocaleString("en-IN"):"",W-M-3,y+6,10,1,NV,"right");y+=9});
+ y+=8;
+ var wt="GM Painting Service gives a 1-year warranty from the date of completion on the paint work done by us. If the paint peels, flakes, blisters or shows uneven fading on the surfaces we painted because of our materials or workmanship, we will repair the affected area free of labour charge.\nNot covered: new cracks or movement in the building; dampness, seepage or leakage (plumbing, terrace, roof or walls); damage from impact, scratches, accidents or misuse; repairs or changes done by others; and normal weathering of exterior surfaces.\nTo claim the warranty, please keep this quotation / bill and inform us within the warranty period.";
+ var WL=d.splitTextToSize(wt,W-2*M-10),wh=WL.length*4+14;
+ d.setFillColor(232,247,239);d.setDrawColor(154,216,184);d.roundRect(M,y,W-2*M,wh,2.5,2.5,"FD");T("1-Year Warranty on Paint Work",M+5,y+7,10.5,1,[15,81,50]);
+ d.setFont("helvetica","normal");d.setFontSize(9);d.setTextColor(15,81,50);d.text(WL,M+5,y+13);y+=wh+9;
+ T("General Terms",M,y,11,1);y+=6;
+ ["Work will be done as per the scope and items written in this quotation.","Any extra work not written in this quotation will be quoted and agreed before it is done.","Colours, finish and paint quality are as agreed with the customer before work starts."].forEach(function(t){d.setFillColor.apply(d,OR);d.circle(M+2,y-1,.8,"F");T(t,M+7,y,9.5);y+=6.5});
+ var sy=Math.max(y+20,258);if(sy>272){d.addPage();head("TERMS");sy=120}
+ d.setDrawColor.apply(d,NV);d.setLineWidth(.4);d.line(M,sy,M+68,sy);d.line(W-M-68,sy,W-M,sy);T("Customer Signature / Acceptance",M,sy+5,8.5,0,GR);T("Authorized Signatory",W-M,sy+5,8.5,0,GR,"right");T("For GM Painting Service",W-M,sy+10,9.5,1,NV,"right");
+ var np=d.getNumberOfPages();for(var p=1;p<=np;p++){d.setPage(p);d.setDrawColor(220,226,234);d.setLineWidth(.2);d.line(M,283,W-M,283);T("Thank you for choosing GM Painting Service",W/2,288,8.5,0,GR,"center");T("+91 99584 16811   |   gm480798@gmail.com   |   gmpaintingservice.in",W/2,292.5,8.5,0,GR,"center");T("Page "+p+" of "+np,W-M,292.5,8.5,0,GR,"right")}
+ var fn="Quotation-GM-"+String(j.no).padStart(4,"0")+"-"+(j.name||"customer").replace(/[^A-Za-z0-9]+/g,"-")+".pdf";
+ if(share){try{var f=new File([d.output("blob")],fn,{type:"application/pdf"});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"GM Painting Quotation",text:"Quotation from GM Painting Service"});window.pdfShared=1;return}}catch(e){if(e&&e.name==="AbortError"){window.pdfShared=1;return}}}
+ d.save(fn)}
+/* ===== GM CRM v2 security: authentication, per-user cache, server permissions and sync ===== */
+var SB_URL="https://gehlfwxubwgcjobfhudk.supabase.co",SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlaGxmd3h1YndnY2pvYmZodWRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM4NjY4OTEsImV4cCI6MjEwOTQ0Mjg5MX0.MwfvhoHdZ5AHC8UsCzsONG1gQSZoV6NRqwNneo0KPIE"; /* Supabase Project URL + anon key only. NEVER use service_role. */
+var sb=null,me=null,prof=null,ADMIN=false,P={view:0,edit:0,payments:0,pdf:0,delete:0,export:0,services:0},panel="",dirty={},snap={},ctr=0,busy=0,lastSync="1970-01-01",base="",baseId="",tm=null,tick=0,STORE_PREFIX="",legacyPending=false,pbase={};
+/* Per-auth-user local storage. Old shared cache is read only for one-time Admin migration. */
+function privateKey(k){return STORE_PREFIX+"gmcrm_"+k}
+function privateGet(k){try{return STORE_PREFIX?localStorage.getItem(privateKey(k)):null}catch(e){return null}}
+function privateSet(k,v){try{if(!STORE_PREFIX)return false;localStorage.setItem(privateKey(k),v);return true}catch(e){return false}}
+function privateRemove(k){try{if(STORE_PREFIX)localStorage.removeItem(privateKey(k))}catch(e){}}
+var PERMS={view:"View customers",edit:"Add / edit customers",payments:"See & edit payments",pdf:"Quotation PDF & WhatsApp",delete:"Delete customers",export:"Download backup / export",services:"Manage services & default rates"};
+var SM="min-height:34px;padding:6px 10px;font-size:13px";
+function sig(j){return JSON.stringify(j,function(k,v){return k==="amt"&&this&&this.qty!==undefined?undefined:v})}
+function worth(j){return !!(j.name||j.phone||j.area||j.items.some(function(i){return i.work||i.desc||i.qty}))}
+function nd(){return Object.keys(dirty).length}
+function status(s,t){var e=$("#st");if(!e)return;e.textContent=t||s;var c=s==="Save failed"?"var(--bad)":s==="Saved"?"var(--ok)":"";e.style.color=c;e.style.borderColor=c||"var(--ln)"}
+function saveDirty(){privateSet("dirty",JSON.stringify(dirty))}
+function dlFile(nm,txt,ty){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:ty}));a.download=nm;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},30000)}
+function setP(p){prof=p;ADMIN=p.role==="admin";P=ADMIN?{view:1,edit:1,payments:1,pdf:1,delete:1,export:1,services:1}:Object.assign({view:0,edit:0,payments:0,pdf:0,delete:0,export:0,services:0},p.perms||{});Object.keys(P).forEach(function(k){P[k]=P[k]===true||P[k]===1||P[k]==="true"});if(!P.payments){jobs.forEach(function(j){j.pays=[]});if(cur)cur.pays=[]};if(!P.payments){pbase={};privateSet("paysok","0")}}
+/* Every edit is cached for this signed-in user first, then queued for server sync. */
+persist=function(){if(!privateSet("jobs",JSON.stringify(jobs))){status("Save failed","Save failed – browser storage unavailable or full");alert("Could not save on this device. Check browser storage and try again.");return false}
+ if(sb&&me){var seen={};jobs.forEach(function(j){seen[j.id]=1;if(snap[j.id]!==sig(j))dirty[j.id]={v:++ctr}});Object.keys(snap).forEach(function(id){if(!seen[id])dirty[id]={v:++ctr,del:1}});saveDirty();status("Saving…");setTimeout(flush,50)}return true};
+async function flush(){if(!sb||!me||busy)return;var ids=Object.keys(dirty);if(!ids.length){status("Saved");return}busy=1;status("Saving…");var rows=[],vs={},sg={},sp={},pj={};
+ ids.forEach(function(id){var d=dirty[id],j=jobs.find(function(x){return x.id===id});if(!j&&!d.del)return;if(!j&&!snap[id])return;var data=j?JSON.parse(JSON.stringify(j)):JSON.parse(snap[id]);if(!P.payments)data.pays=[];
+  /* Payments are sent ONLY when this user may edit them AND they really changed (or the customer is new). Otherwise the key is left out and the server keeps the stored payments. */
+  var pjs=JSON.stringify(data.pays||[]),send=!d.del&&P.payments&&(!snap[id]||(pbase[id]!==undefined&&pjs!==pbase[id]));
+  var out=JSON.parse(JSON.stringify(data));if(!send)delete out.pays;
+  rows.push({id:id,data:out,deleted:!!d.del});vs[id]=d.v;sg[id]=sig(data);sp[id]=send;pj[id]=pjs});
+ try{if(rows.length){var r=await sb.from("jobs").upsert(rows,{onConflict:"id"});if(r.error)throw r.error}
+  rows.forEach(function(x){if(dirty[x.id]&&dirty[x.id].v===vs[x.id]){delete dirty[x.id];if(x.deleted)delete snap[x.id];else snap[x.id]=sg[x.id]}if(sp[x.id])pbase[x.id]=pj[x.id]});saveDirty();if(ADMIN)privateSet("migrated","1");busy=0;if(nd())return flush();status("Saved")
+ }catch(e){busy=0;saveDirty();status("Save failed","Save failed – tap to retry");console.error("CRM sync failed:",e)}}
+function mergePays(a,b){var seen={},o=[];(b||[]).concat(a||[]).forEach(function(p){var k=JSON.stringify(p);if(!seen[k]){seen[k]=1;o.push(p)}});return o}
+async function pull(all){if(!sb||!me)return false;try{
+  if(!all&&await svcPull()&&!cur&&!panel)render();
+  var pr=await sb.from("profiles").select("*").eq("id",me.id).maybeSingle();
+  if(pr.error)throw pr.error;
+  if(!pr.data||pr.data.id!==me.id||!pr.data.active||["admin","worker"].indexOf(pr.data.role)<0){await revokeSession();return false}
+  var oldPerms=JSON.stringify(P),hadPay=!!P.payments;setP(pr.data);privateSet("profile",JSON.stringify(pr.data));
+  /* Payments permission just switched ON: reload everything once so real payments replace the hidden (empty) ones. */
+  if(!hadPay&&P.payments){all=true;pbase={}}
+  if(!P.payments)privateSet("jobs",JSON.stringify(jobs));if(!P.view){await revokeSession();return false}if(oldPerms!==JSON.stringify(P)&&!cur&&!panel)render();
+  var r=await sb.from("crm_jobs").select("id,data,deleted,updated_at").gt("updated_at",all?"1970-01-01":lastSync);if(r.error)throw r.error;
+  var ch=0,mx=lastSync,skipMin=null;(r.data||[]).forEach(function(x){if(x.updated_at>mx)mx=x.updated_at;
+   if(dirty[x.id]||(cur&&cur.id===x.id)){
+    /* Not applied now (being edited / waiting to save). Remember its time so the next sync fetches it again - it must never be skipped for good. */
+    if(skipMin===null||x.updated_at<skipMin)skipMin=x.updated_at;
+    if(P.payments&&!x.deleted&&x.data&&Array.isArray(x.data.pays)&&pbase[x.id]===undefined){var k=jobs.find(function(j){return j.id===x.id});if(k)k.pays=mergePays(k.pays,x.data.pays);if(cur&&cur.id===x.id)cur.pays=mergePays(cur.pays,x.data.pays);pbase[x.id]=JSON.stringify(x.data.pays)}
+    return}
+   var i=jobs.findIndex(function(j){return j.id===x.id});
+   if(x.deleted){if(i>-1){jobs.splice(i,1);ch=1}delete snap[x.id];delete pbase[x.id]}
+   else{var d=x.data||{};d.items=d.items||[];d.pays=d.pays||[];var s=sig(d);if(i>-1){if(sig(jobs[i])!==s){jobs[i]=d;ch=1}}else{jobs.push(d);ch=1}snap[x.id]=s;if(P.payments)pbase[x.id]=JSON.stringify(d.pays)}});
+  if(r.data&&r.data.length){var nl=Date.parse(mx)-10000;if(skipMin!==null)nl=Math.min(nl,Date.parse(skipMin)-1000);lastSync=new Date(nl).toISOString()}
+  if(P.payments)privateSet("paysok","1");
+  if(ch){if(!privateSet("jobs",JSON.stringify(jobs)))status("Save failed","Cloud data loaded, but local storage could not be updated");if(!cur&&!panel)render()}
+  if(!nd()&&!busy)status("Saved");return true
+ }catch(e){/* A temporary network/API error must NEVER erase the local cache or pending edits. */status("Offline","Offline – local changes are kept and will sync when connected");console.warn("CRM pull paused:",e);return false}}
+async function revokeSession(){/* A confirmed server-side revocation locks the UI; per-user cache is retained, not exposed to another account. */try{if(sb)await sb.auth.signOut()}catch(e){}jobs=[];cur=null;panel="";me=null;prof=null;ADMIN=false;P={view:0,edit:0,payments:0,pdf:0,delete:0,export:0,services:0};dirty={};snap={};STORE_PREFIX="";var b=$("#sbar");if(b)b.style.display="none";loginView("Your CRM access is inactive or has been revoked. Contact the administrator.")}
+async function out(){try{if(sb)await sb.auth.signOut()}catch(e){}jobs=[];cur=null;panel="";me=null;prof=null;ADMIN=false;P={view:0,edit:0,payments:0,pdf:0,delete:0,export:0,services:0};dirty={};snap={};STORE_PREFIX="";var b=$("#sbar");if(b)b.style.display="none"}
+async function logout(){commit();await flush();if(nd()&&!confirm("Some changes are NOT saved online yet. They will remain in this browser for this account. Log out anyway?"))return;await out();loginView()}
+function bar(){if($("#sbar"))return;var d=document.createElement("div");d.id="sbar";d.className="rw";d.style.cssText="position:sticky;top:0;z-index:5;background:var(--bg);padding:6px 0";
+ d.innerHTML='<button class="pill" id="st" style="min-height:0;background:transparent;color:var(--mu);padding:4px 10px">Saved</button><span style="display:flex;gap:6px"><button class="s" id="bw" style="'+SM+'">Workers</button><button class="s" id="bb" style="'+SM+'">Backups</button><button class="s" id="bo" style="'+SM+'">Log out</button></span>';
+ $("#app").parentNode.insertBefore(d,$("#app"));$("#st").onclick=function(){flush();pull(false)};$("#bw").onclick=function(){commit();cur=null;panel="w";render()};$("#bb").onclick=function(){commit();cur=null;panel="b";render()};$("#bo").onclick=logout}
+function loginView(msg){panel="";cur=null;var A=$("#app");A.innerHTML='<div class="cd" style="margin-top:30px;text-align:center"><img src="'+LOGO+'" width="64" height="64" alt=""><h1>GM Painting CRM</h1><div class="mu">Authorised staff only</div><label style="text-align:left">Email</label><input id="le" type="email" autocomplete="username"><label style="text-align:left">Password</label><input id="lp" type="password" autocomplete="current-password"><div class="bad" id="lm" style="margin-top:8px">'+esc(msg||"")+'</div><div class="b"><button id="lg">Sign in</button></div></div>';
+ $("#lp").onkeydown=function(e){if(e.key==="Enter")$("#lg").click()};$("#lg").onclick=async function(){var b=this;b.disabled=true;$("#lm").textContent="";try{var r=await sb.auth.signInWithPassword({email:$("#le").value.trim(),password:$("#lp").value});if(r.error)throw r.error;await enter(r.data.user)}catch(e){$("#lm").textContent="Could not sign in. Check email, password and internet."}finally{b.disabled=false}}}
+async function enter(u){
+ me=u;STORE_PREFIX="gmcrm_user_"+u.id+"_";dirty={};snap={};lastSync="1970-01-01";try{dirty=JSON.parse(privateGet("dirty")||"{}")}catch(e){dirty={}}
+ var p=null,onlineProfile=false;try{var r=await sb.from("profiles").select("*").eq("id",u.id).maybeSingle();if(r.error)throw r.error;if(!r.data||r.data.id!==u.id||!r.data.active||["admin","worker"].indexOf(r.data.role)<0){await revokeSession();return}p=r.data;onlineProfile=true;privateSet("profile",JSON.stringify(p))}catch(e){try{p=JSON.parse(privateGet("profile")||"null")}catch(x){p=null}if(!p||p.id!==u.id||!p.active||["admin","worker"].indexOf(p.role)<0){jobs=[];cur=null;loginView("Cannot verify your CRM access while offline. Connect to the internet and sign in again.");return}}
+ setP(p);if(!P.view){await revokeSession();return}try{var raw=privateGet("jobs");jobs=raw?JSON.parse(raw):[];if(!Array.isArray(jobs))throw new Error("Invalid cache");jobs.forEach(function(o){if(!o.items)o.items=[];if(!o.pays)o.pays=[]})}catch(e){jobs=[];status("Save failed","Local customer cache could not be read")}
+ if(!P.payments)jobs.forEach(function(j){j.pays=[]});
+ pbase={};if(P.payments&&privateGet("paysok")==="1")jobs.forEach(function(j){pbase[j.id]=JSON.stringify(j.pays||[])});
+ /* Back up legacy shared data once, but only ever migrate it into the verified Admin account. */
+ if(p.role==="admin"&&!localStorage.getItem("gmcrm_legacy_backup")){var legacy=localStorage.getItem("gmcrm_jobs");if(legacy){try{localStorage.setItem("gmcrm_legacy_backup",legacy)}catch(e){}}}
+ legacyPending=p.role==="admin"&&!privateGet("migrated")&&!!localStorage.getItem("gmcrm_legacy_backup");
+ bar();$("#sbar").style.display="";$("#bw").style.display=$("#bb").style.display=ADMIN?"":"none";
+ jobs.forEach(function(j){if(!dirty[j.id])snap[j.id]=sig(j)});if(!privateSet("jobs",JSON.stringify(jobs)))status("Save failed","Browser storage unavailable");
+ await svcPull();render();var synced=onlineProfile?await pull(true):false;
+ if(synced)await migrateLegacyIfReady();
+ if(!synced&&!onlineProfile)status("Offline","Offline – showing this account's saved local data");else if(synced)privateSet("cloudcache","1");
+ if(!tick){tick=setInterval(async function(){if(!me)return;await flush();var ok=await pull(false);if(ok)await migrateLegacyIfReady()},20000);window.addEventListener("online",function(){if(me){pull(false).then(async function(ok){if(ok){await migrateLegacyIfReady();flush()}})}})}
+}
+async function migrateLegacyIfReady(){if(!legacyPending||!me||!ADMIN)return;try{var old=JSON.parse(localStorage.getItem("gmcrm_legacy_backup")||"[]");if(!Array.isArray(old))throw new Error("Legacy backup is not a customer array");var added=0;old.forEach(function(j){if(j&&typeof j.id==="string"&&!jobs.some(function(x){return x.id===j.id})){j.items=Array.isArray(j.items)?j.items:[];j.pays=Array.isArray(j.pays)?j.pays:[];if(!P.payments)j.pays=[];jobs.push(j);added++}});legacyPending=false;if(added){if(!persist())throw new Error("Could not save migrated customers")}else privateSet("migrated","1")}catch(e){status("Save failed","Old local data migration paused; original backup is preserved");console.error("Legacy migration paused:",e)}}
+async function boot(){
+ if(!SB_URL||!SB_KEY){jobs=[];cur=null;panel="";var a=$("#app");if(a)a.innerHTML='<div class="cd" style="margin-top:30px;text-align:center"><h1>GM Painting CRM</h1><div class="bad">CRM is locked. Supabase Project URL and anon public key are not configured. Contact the administrator.</div></div>';return}
+ if(!window.supabase){$("#app").innerHTML='<div class="cd bad">Could not load the login system. Check your internet and reload.</div>';return}
+ try{sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});var z=await sb.auth.getSession();if(z.error)throw z.error;var session=z.data&&z.data.session;if(!session)return loginView();await enter(session.user)}catch(e){sb=null;jobs=[];var a=$("#app");if(a)a.innerHTML='<div class="cd bad">Could not verify the secure login connection. Check the Supabase settings and internet, then reload.</div>'}}
+/* autosave while editing: debounced, plus on Back / tab hide */
+function commit(){if(!cur||!P.edit)return;clearTimeout(tm);var s=sig(cur);if(s===base||!worth(cur))return;cur.upd=Date.now();var c=JSON.parse(JSON.stringify(cur)),i=jobs.findIndex(function(x){return x.id===c.id});if(i>-1)jobs[i]=c;else jobs.push(c);base=sig(cur);persist()}
+function arm(){if(!cur||!P.edit)return;if(sig(cur)!==base&&worth(cur)){status("Saving…");clearTimeout(tm);tm=setTimeout(commit,900)}}
+["input","change","click"].forEach(function(e){document.addEventListener(e,function(){setTimeout(arm,0)},true)});
+document.addEventListener("visibilitychange",function(){if(document.hidden){commit();flush()}});window.addEventListener("pagehide",commit);
+window.addEventListener("beforeunload",function(e){commit();if(nd()){e.preventDefault();e.returnValue=""}});
+/* permission-aware wrappers around the original screens */
+var _render=render,_list=list,_edit=edit;
+render=function(){if(panel==="s")return sView();if(panel==="w")return wView();if(panel==="b")return bView();_render()};
+list=function(){_list();perm("l")};
+edit=function(){_edit();if(cur&&cur.id!==baseId){baseId=cur.id;base=sig(cur)}perm("e")};
+function hide(s){document.querySelectorAll(s).forEach(function(e){e.style.display="none"})}
+function perm(v){var A=$("#app");
+ if(v==="l"){if(!P.view){A.innerHTML='<div class="cd">You do not have permission to view customers. Please contact GM Painting Service.</div>';return}
+  if(!P.payments){var c=A.querySelector(".g2 .cd:nth-child(2)");if(c)c.style.display="none";A.querySelectorAll("[data-o] span.bad").forEach(function(x){x.remove()})}
+  if(!P.edit)hide("#nw");if(!P.export)hide("#bkp");if(!ADMIN)hide("#rst");
+  var b=$("#bkp");if(b)b.onclick=dl;var rf=$("#rf");if(rf)rf.onchange=function(e){readRestore(e.target.files[0]);e.target.value=""};
+  if(ADMIN||P.services){A.insertAdjacentHTML("beforeend",'<button class="s" id="svb" style="width:100%;margin-top:8px">Manage services &amp; default rates</button>');$("#svb").onclick=function(){commit();cur=null;panel="s";render()}}
+  if(P.export){A.insertAdjacentHTML("beforeend",'<button class="s" id="csv" style="width:100%;margin-top:8px">Export customers (CSV)</button>');$("#csv").onclick=csv}}
+ else{if(!P.edit){A.querySelectorAll("input,select,textarea").forEach(function(e){e.disabled=true});hide("#sv,#ai,#ap,#dl,[data-di],[data-dp]")}
+  if(!P.delete)hide("#dl");
+  if(!P.payments)A.querySelectorAll("h2").forEach(function(h){if(h.textContent==="Payment"&&h.nextElementSibling){h.style.display="none";h.nextElementSibling.style.display="none"}});
+  if(!P.pdf)hide("#sh,#pd");else{var s=$("#sh");if(s){s.insertAdjacentHTML("beforebegin",'<button id="wa" style="background:#16a34a">Send quotation on WhatsApp</button>');$("#wa").onclick=waSend}}}}
+async function waSend(){var j=cur,ph=String(j.phone).replace(/\D/g,"");if(ph.length===10)ph="91"+ph;window.pdfShared=0;await pdf(j,true);
+ if(!window.pdfShared&&ph&&confirm("The quotation PDF was downloaded. Open WhatsApp now? Then tap the attach (📎) button → Document → choose the PDF."))window.open("https://wa.me/"+ph+"?text="+encodeURIComponent("Hello "+(j.name||"")+", please find your quotation from GM Painting Service."),"_blank")}
+function dl(){dlFile("gm-crm-backup-"+today()+".json",JSON.stringify({app:"gm-crm",version:2,exported:new Date().toISOString(),jobs:jobs}),"application/json")}
+function csv(){var c=function(v){v=String(v==null?"":v);if(/^[=@+\-\t\r]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
+ dlFile("gm-customers-"+today()+".csv","Quote No,Date,Name,Mobile,Area,Status,Total,Received,Balance,Follow-up\n"+jobs.map(function(j){var k=calc(j);return[j.no,j.date,j.name,j.phone,j.area,j.st,k.t,P.payments?k.paid:"",P.payments?k.bal:"",j.fu].map(c).join(",")}).join("\n"),"text/csv")}
+function okJob(j){return j&&typeof j.id==="string"&&Array.isArray(j.items)}
+function readRestore(f){if(!f)return;if(!ADMIN){alert("Only the owner can restore backups.");return}var r=new FileReader();r.onload=async function(){var a;try{a=JSON.parse(r.result);a=(Array.isArray(a)?a:a.jobs||[]).filter(okJob);if(!a.length)throw 0}catch(x){alert("Not a valid GM CRM backup file. Nothing was changed.");return}
+ if(confirm("Restore "+a.length+" customers from this backup?\n\nCustomers not in the backup are kept. A safety copy of your current data is saved first."))await restoreJobs(a)};r.readAsText(f)}
+async function restoreJobs(a){try{localStorage.setItem("gmcrm_prerestore",JSON.stringify(jobs))}catch(e){}
+ if(sb){var r=await sb.from("backups").insert({kind:"pre-restore",data:jobs,created_by:me.id});if(r.error){alert("Could not save a safety copy, so the restore was cancelled. Nothing was changed.");return}}
+ a.forEach(function(j){j.pays=j.pays||[];var i=jobs.findIndex(function(x){return x.id===j.id});if(i>-1)jobs[i]=j;else jobs.push(j)});
+ persist();panel="";cur=null;render();alert("Restored "+a.length+" customers. A safety copy of the previous data was saved.")}
+function hdr(t){return '<div class="rw"><button class="s" id="pb">← Back</button><b>'+t+'</b></div>'}
+function pback(){var b=$("#pb");if(b)b.onclick=function(){panel="";render()}}
+async function wView(){var A=$("#app");A.innerHTML=hdr("Workers & access")+'<p class="mu">Loading…</p>';pback();
+ var r=await sb.from("profiles").select("*").order("email");if(r.error){A.innerHTML=hdr("Workers & access")+'<p class="bad">Could not load workers.</p>';pback();return}
+ var cb=function(k,l,on,a){return '<label style="display:flex;align-items:center;gap:8px;color:var(--tx);font-size:14px"><input type="checkbox" style="width:22px;min-height:22px;margin:0" '+a+'="'+k+'"'+(on?" checked":"")+'>'+l+'</label>'};
+ A.innerHTML=hdr("Workers & access")+'<div class="bn">To add a worker: Supabase dashboard → Authentication → Users → Add user (email + password). They appear here switched OFF until you turn them on.</div>'+r.data.map(function(p){
+  if(p.role==="admin")return '<div class="cd"><b>'+esc(p.email)+'</b> <span class="pill">Owner</span><div class="mu">Full access</div></div>';
+  return '<div class="cd" data-u="'+p.id+'"><b>'+esc(p.email)+'</b><label>Name</label><input data-n value="'+esc(p.name)+'">'+cb("active","Access ON (can log in)",p.active,"data-a")+Object.keys(PERMS).map(function(k){return cb(k,PERMS[k],(p.perms||{})[k],"data-p")}).join("")+'<div class="g2" style="margin-top:8px"><button data-s>Save</button><button class="r" data-x>Revoke all</button></div></div>'}).join("");
+ pback();A.querySelectorAll("[data-u]").forEach(function(c){var id=c.dataset.u;
+  c.querySelector("[data-s]").onclick=async function(){var pm={};c.querySelectorAll("[data-p]").forEach(function(x){pm[x.dataset.p]=x.checked});var u=await sb.from("profiles").update({name:c.querySelector("[data-n]").value,active:c.querySelector("[data-a]").checked,perms:pm}).eq("id",id);alert(u.error?"Could not save.":"Saved. It applies on the worker's phone within about 20 seconds.")};
+  c.querySelector("[data-x]").onclick=async function(){if(!confirm("Switch off this worker's access completely?"))return;var u=await sb.from("profiles").update({active:false,perms:{}}).eq("id",id);if(u.error)alert("Could not revoke.");else wView()}})}
+async function bView(){var A=$("#app");A.innerHTML=hdr("Backups")+'<p class="mu">Loading…</p>';pback();
+ var r=await sb.from("backups").select("id,created_at,kind").order("created_at",{ascending:false}).limit(12),t=await sb.from("crm_deleted_jobs").select("id,data");
+ A.innerHTML=hdr("Backups")+'<div class="b"><button id="b1">Download full backup now</button><button class="s" id="b2">Save a snapshot to the cloud now</button><button class="s" id="b3">Restore from a backup file</button></div><input type="file" id="rf2" accept=".json" hidden><h2>Automatic cloud snapshots</h2><p class="mu">Saved automatically at least once a day when data changes (last 60 kept). Restoring never deletes customers that are not in the backup, and your current data is saved first.</p>'+
+ ((r.data||[]).map(function(b){return '<div class="cd rw"><span>'+esc(new Date(b.created_at).toLocaleString("en-IN"))+' <span class="pill">'+esc(b.kind)+'</span></span><span style="display:flex;gap:6px"><button class="s" data-bd="'+b.id+'" style="'+SM+'">Download</button><button class="s" data-br="'+b.id+'" style="'+SM+'">Restore</button></span></div>'}).join("")||'<p class="mu">None yet.</p>')+
+ '<h2>Recently deleted customers</h2>'+((t.data||[]).map(function(x){return '<div class="cd rw"><span>'+esc(x.data.name||"(no name)")+' #'+esc(x.data.no)+'</span><button class="s" data-tr="'+esc(x.id)+'" style="'+SM+'">Restore</button></div>'}).join("")||'<p class="mu">None.</p>');
+ pback();$("#b1").onclick=dl;$("#b3").onclick=function(){$("#rf2").click()};$("#rf2").onchange=function(e){readRestore(e.target.files[0]);e.target.value=""};
+ $("#b2").onclick=async function(){var x=await sb.from("backups").insert({kind:"manual",data:jobs,created_by:me.id});alert(x.error?"Could not save snapshot.":"Snapshot saved.");bView()};
+ var get=async function(id){var x=await sb.from("backups").select("data").eq("id",id).single();return x.error?null:x.data.data};
+ A.querySelectorAll("[data-bd]").forEach(function(b){b.onclick=async function(){var d=await get(b.dataset.bd);if(!d)return alert("Could not load.");dlFile("gm-crm-snapshot-"+b.dataset.bd+".json",JSON.stringify({app:"gm-crm",version:2,jobs:d}),"application/json")}});
+ A.querySelectorAll("[data-br]").forEach(function(b){b.onclick=async function(){var d=await get(b.dataset.br);d=(d||[]).filter(okJob);if(!d.length)return alert("Could not load.");if(confirm("Restore "+d.length+" customers from this snapshot? Your current data is saved first."))await restoreJobs(d)}});
+ A.querySelectorAll("[data-tr]").forEach(function(b){b.onclick=async function(){var x=await sb.from("jobs").update({deleted:false}).eq("id",b.dataset.tr);if(x.error)return alert("Could not restore.");await pull(true);bView()}})}
+
+/* ===== Services: list comes from the database (owner-managed); built-in list is the fallback ===== */
+var svcOK=null;
+function sOf(p,i){return p.s!=null?p.s:(p.k==="cus"?999:(i+1)*10)}
+function setSvc(a){PRESETS.length=0;a.forEach(function(x){PRESETS.push(x)})}
+function svcCache(){try{localStorage.setItem("gmcrm_services",JSON.stringify(PRESETS))}catch(e){}}
+try{var _sc=JSON.parse(localStorage.getItem("gmcrm_services")||"null");if(_sc&&_sc.length&&_sc.every(function(x){return x&&x.k&&x.n}))setSvc(_sc)}catch(e){}
+async function svcPull(){if(!sb)return;try{var r=await sb.from("services").select("*").order("sort");svcOK=!r.error;if(r.error||!r.data||!r.data.length)return;
+ var a=r.data.map(function(x){return{k:x.id,n:x.name,r:x.rate==null?"":Number(x.rate),u:x.unit||"",on:x.active!==false,s:x.sort}});
+ if(JSON.stringify(a)!==JSON.stringify(PRESETS)){setSvc(a);svcCache();return 1}}catch(e){}}
+async function svcSave(o){if(!(ADMIN||P.services)){alert("You do not have permission to change services.");return false}
+ var ci=PRESETS.findIndex(function(p){return p.k==="cus"}),i=PRESETS.findIndex(function(p){return p.k===o.k});
+ if(i<0){o.s=Math.max.apply(null,[0].concat(PRESETS.filter(function(p){return p.k!=="cus"}).map(sOf)))+10}else o.s=sOf(PRESETS[i],i);
+ if(sb&&svcOK!==false){var r=await sb.from("services").upsert({id:o.k,name:o.n,rate:o.r===""?null:o.r,unit:o.u,active:o.on!==false,sort:o.s});if(r.error){alert("Could not save online. Nothing was changed.");return false}}
+ if(i>-1)PRESETS[i]=o;else if(ci>-1)PRESETS.splice(ci,0,o);else PRESETS.push(o);svcCache();return true}
+function sView(){var A=$("#app");
+ A.innerHTML=hdr("Services & default rates")+(sb&&svcOK===false?'<div class="bn">The online services table was not found. Run MIGRATION-services.sql in Supabase, then reload. Until then changes stay on this device only.</div>':'')+
+ '<p class="mu">The default rate fills in when a service is chosen. You can still type any other rate on each quotation. Leave blank for no default rate. Turning a service off hides it from new quotations; old quotations keep it.</p>'+
+ PRESETS.map(function(p){return svRow(p,p.k)}).join("")+svRow({k:"",n:"",r:"",u:"sq ft",on:true},"")+
+ (sb&&svcOK&&ADMIN?'<button class="s" id="sseed" style="width:100%;margin-top:8px">Save all of the above to the online database</button>':'');
+ pback();
+ A.querySelectorAll("[data-s]").forEach(function(c){c.querySelector("[data-sv]").onclick=async function(){var nm=c.querySelector("[data-sn]").value.trim(),rt=c.querySelector("[data-sr]").value.trim().replace(/,/g,"");
+  if(!nm)return alert("Please enter a service name.");if(rt!==""&&(isNaN(Number(rt))||Number(rt)<0))return alert("Rate must be a number.");
+  var k=c.dataset.s||("s"+Date.now().toString(36));if(await svcSave({k:k,n:nm,r:rt===""?"":Number(rt),u:c.querySelector("[data-su]").value,on:c.querySelector("[data-sa]").checked}))sView()}});
+ var sd=$("#sseed");if(sd)sd.onclick=async function(){var ok=true;for(var i=0;i<PRESETS.length;i++){var p=PRESETS[i];var r=await sb.from("services").upsert({id:p.k,name:p.n,rate:p.r===""?null:p.r,unit:p.u,active:p.on!==false,sort:sOf(p,i)});if(r.error)ok=false}alert(ok?"Saved.":"Some services could not be saved.")}}
+function svRow(p,k){var u=p.u||"";return '<div class="cd" data-s="'+esc(k)+'"><b>'+(k?"":"Add a new service")+'</b><label>Service name</label><input data-sn value="'+esc(p.n)+'"><div class="g2"><div><label>Default rate (₹)</label><input data-sr inputmode="decimal" value="'+esc(p.r)+'"></div><div><label>Unit</label><select data-su>'+[["sq ft","sq ft"],["lump sum","lump sum"],["","other"]].map(function(o){return '<option value="'+o[0]+'"'+(o[0]===u?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select></div></div><label style="display:flex;align-items:center;gap:8px;color:var(--tx);font-size:14px"><input type="checkbox" data-sa style="width:22px;min-height:22px;margin:0"'+(p.on!==false?" checked":"")+'>Active (shown in the service list)</label><div class="b"><button data-sv>'+(k?"Save":"Add service")+'</button></div></div>'}
+
+boot();
+</script></body></html>
